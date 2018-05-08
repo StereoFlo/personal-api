@@ -1,0 +1,13 @@
+App\Entity\Page:
+  type: entity
+  id:
+    pageId:
+      type: guid
+
+  fields:
+    createdAt:
+      type: carbondatetime
+      nullable: true
+    updatedAt:
+      type: carbondatetime
+      nullable: true
