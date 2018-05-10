@@ -5,6 +5,10 @@ App\Entity\Page:
       type: guid
 
   fields:
+    title:
+      type: string
+    content:
+      type: text
     createdAt:
       type: carbondatetime
       nullable: true

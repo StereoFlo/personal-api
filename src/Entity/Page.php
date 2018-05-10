@@ -17,6 +17,16 @@ class Page
     private $pageId;
 
     /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var Carbon
      */
     private $createdAt;
@@ -58,5 +68,21 @@ class Page
     public function getUpdatedAt(): Carbon
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
     }
 }
