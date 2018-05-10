@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "beberlei/DoctrineExtensions": "^1.0",
         "league/tactician-bundle": "^1.1",
+        "nelmio/cors-bundle": "^1.5",
         "nesbot/carbon": "^1.27",
         "ramsey/uuid": "^3.7",
         "symfony/console": "^4.0",
