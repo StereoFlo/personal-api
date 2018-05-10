@@ -42,7 +42,7 @@ class AuthController
     {
         $email    = $request->request->get('email');
         $username = $request->request->get('username');
-        $password = $request->request->get('email');
+        $password = $request->request->get('password');
 
         $this->bus->handle(new UserRegisterCommand($username, $email, $password));
 
