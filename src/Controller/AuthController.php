@@ -74,7 +74,7 @@ class AuthController
             throw new \Exception('invalid.password');
         }
 
-        $this->userRepository->save($user->setUpdatedAt());
+        $this->userRepository->save($user->setLastLogin());
 
         return new JsonResponse(['success' => true, 'message' => 'success logged in', 'data' => ['token' => $user->getApiToken()->getKey()]]);
     }

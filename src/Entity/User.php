@@ -42,6 +42,11 @@ class User
     private $updatedAt;
 
     /**
+     * @var Carbon
+     */
+    private $lastLogin;
+
+    /**
      * @var ApiToken
      */
     private $apiToken;
@@ -176,6 +181,23 @@ class User
     public function setUpdatedAt(): User
     {
         $this->updatedAt = Carbon::now();
+        return $this;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function getLastLogin(): Carbon
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @return User
+     */
+    public function setLastLogin(): User
+    {
+        $this->lastLogin = Carbon::now();
         return $this;
     }
 

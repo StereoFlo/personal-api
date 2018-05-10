@@ -15,6 +15,9 @@ App\Entity\User:
       unique: true
     password:
       type: text
+    lastLogin:
+      type: carbondatetime
+      nullable: true
     createdAt:
       type: carbondatetime
       nullable: true
