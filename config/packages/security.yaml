@@ -28,5 +28,9 @@ security:
                   - app.api_authenticator
 
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, methods: [OPTIONS], roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/register, methods: [POST], roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/login, methods: [POST], roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+        - { path: ^/admin, roles: ROLE_ADMIN }
