@@ -1,0 +1,29 @@
+App\Entity\User:
+  type: entity
+  id:
+    userId:
+      type: guid
+
+  fields:
+    username:
+      type: string
+      length: 191
+      unique: true
+    email:
+      type: string
+      length: 191
+      unique: true
+    password:
+      type: string
+    createdAt:
+      type: carbondatetime
+      nullable: true
+    updatedAt:
+      type: carbondatetime
+      nullable: true
+
+  embedded:
+    apiToken:
+      class: App\Entity\ApiToken
+    roles:
+      class: App\Entity\Roles

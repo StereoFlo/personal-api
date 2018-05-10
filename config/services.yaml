@@ -30,3 +30,24 @@ services:
     App\Listener\ExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
+
+    user.repo:
+      class: App\Repository\UserRepository
+      arguments:
+        - '@doctrine.orm.entity_manager'
+
+    app.api_authenticator:
+      class: App\Security\Authentication\ApiTokenAuthenticator
+      arguments: ['@user.repo']
+
+    app.api_user_provider:
+      class: App\Security\Authentication\ApiUserProvider
+      arguments: ['@user.repo']
+
+    app.current_user_factory:
+      class: App\Security\Authentication\CurrentUserFactory
+      arguments: ['@security.token_storage']
+
+    app.current_user:
+      class: App\Entity\User
+      factory: ['@app.current_user_factory', getUser]

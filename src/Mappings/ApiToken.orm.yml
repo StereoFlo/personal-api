@@ -1,0 +1,9 @@
+App\Entity\ApiToken:
+  type: embeddable
+
+  fields:
+    key:
+      type: string
+      nullable: true
+      length: 191
+      unique: true
