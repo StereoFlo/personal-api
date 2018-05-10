@@ -2,6 +2,7 @@
 
 namespace App\Listener;
 
+use HttpInvalidParamException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -33,7 +34,7 @@ class ExceptionListener
             $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 401);
             $event->setResponse($response);
         }
-        if ($exception instanceof \HttpInvalidParamException) {
+        if ($exception instanceof HttpInvalidParamException) {
             $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 422);
             $event->setResponse($response);
         }

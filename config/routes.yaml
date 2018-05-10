@@ -8,7 +8,7 @@ register:
 login:
     path: /auth/login
     controller: App\Controller\AuthController::login
-    methods: [POST]
+    methods: [OPTIONS, POST]
 logout:
     path: /auth/logout
     controller: App\Controller\AuthController::logout

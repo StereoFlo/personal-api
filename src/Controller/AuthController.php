@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Commands\UserRegisterCommand;
 use App\Repository\UserInterface;
+use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +66,7 @@ class AuthController
         $password = $request->request->get('password');
 
         if (empty($email) || empty($password)) {
-            throw new \HttpInvalidParamException('form.input.empty');
+            throw new HttpInvalidParamException('form.input.empty');
         }
 
         $user = $this->userRepository->getByEmail($email);
