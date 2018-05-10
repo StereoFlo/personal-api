@@ -20,6 +20,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/tactician-logger" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/package-versions" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />

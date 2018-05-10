@@ -128,5 +128,56 @@ class User
         return $this->roles;
     }
 
+    /**
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername(string $username): User
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail(string $email): User
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function setCreatedAt(): User
+    {
+        $this->createdAt = Carbon::now();
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function setUpdatedAt(): User
+    {
+        $this->updatedAt = Carbon::now();
+        return $this;
+    }
+
 
 }
