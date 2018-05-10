@@ -7,6 +7,7 @@ use App\Repository\UserInterface;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
  * Class AuthController
@@ -61,13 +62,13 @@ class AuthController
         $password = $request->request->get('password');
 
         if (empty($email) || empty($password)) {
-            throw new \Exception('form.input.empty');
+            throw new \HttpInvalidParamException('form.input.empty');
         }
 
         $user = $this->userRepository->getByEmail($email);
 
         if (!$user) {
-            throw new \Exception('login.not.found');
+            throw new UnauthorizedHttpException('login.not.found');
         }
 
         if (!\password_verify($password, $user->getPassword())) {

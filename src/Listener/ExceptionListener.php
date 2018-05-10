@@ -5,6 +5,7 @@ namespace App\Listener;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
  * Class ExceptionListener
@@ -26,6 +27,14 @@ class ExceptionListener
         }
         if ($exception instanceof \Exception) {
             $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 500);
+            $event->setResponse($response);
+        }
+        if ($exception instanceof UnauthorizedHttpException) {
+            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 401);
+            $event->setResponse($response);
+        }
+        if ($exception instanceof \HttpInvalidParamException) {
+            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 422);
             $event->setResponse($response);
         }
     }
