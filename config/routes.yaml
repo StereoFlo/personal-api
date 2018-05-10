@@ -9,3 +9,7 @@ login:
     path: /auth/login
     controller: App\Controller\AuthController::login
     methods: [POST]
+logout:
+    path: /auth/logout
+    controller: App\Controller\AuthController::logout
+    methods: [POST]

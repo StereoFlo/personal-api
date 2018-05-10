@@ -78,4 +78,12 @@ class AuthController
 
         return new JsonResponse(['success' => true, 'message' => 'success logged in', 'data' => ['token' => $user->getApiToken()->getKey()]]);
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        return JsonResponse::create(['success' => true]);
+    }
 }
