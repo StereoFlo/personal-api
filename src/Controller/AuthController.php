@@ -20,6 +20,9 @@ class AuthController
      */
     private $bus;
 
+    /**
+     * @var UserInterface
+     */
     private $userRepository;
 
     /**
