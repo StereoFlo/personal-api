@@ -32,10 +32,11 @@ class UserRegisterHandler
      */
     public function handle(UserRegisterCommand $command)
     {
+        $password = \password_hash($command->getPassword(), PASSWORD_BCRYPT);
         $user = new User();
         $user->setEmail($command->getEmail())
             ->setUsername($command->getUsername())
-            ->setPassword(\password_hash($command->getPassword(), PASSWORD_BCRYPT))
+            ->setPassword($password)
             ->setCreatedAt()
             ->setUpdatedAt();
         $this->userRepository->save($user);

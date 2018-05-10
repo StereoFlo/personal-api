@@ -24,5 +24,9 @@ class ExceptionListener
             $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], $exception->getStatusCode(), $exception->getHeaders());
             $event->setResponse($response);
         }
+        if ($exception instanceof \Exception) {
+            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 500);
+            $event->setResponse($response);
+        }
     }
 }

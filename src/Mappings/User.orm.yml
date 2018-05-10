@@ -14,7 +14,7 @@ App\Entity\User:
       length: 191
       unique: true
     password:
-      type: string
+      type: text
     createdAt:
       type: carbondatetime
       nullable: true
