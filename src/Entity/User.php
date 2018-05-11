@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
  * Class User
  * @package App\Entity
  */
-class User
+class User extends AbstractEntity
 {
     /**
      * @var string
@@ -34,12 +34,12 @@ class User
     /**
      * @var Carbon
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var Carbon
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @var Carbon
@@ -61,9 +61,8 @@ class User
      */
     public function __construct()
     {
+        parent::__construct();
         $this->userId = Uuid::uuid4();
-        $this->createdAt = Carbon::now();
-        $this->updatedAt = Carbon::now();
 
         $this->apiToken = new ApiToken();
         $this->roles    = new Roles();
@@ -163,24 +162,6 @@ class User
     public function setPassword(string $password): User
     {
         $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function setCreatedAt(): User
-    {
-        $this->createdAt = Carbon::now();
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function setUpdatedAt(): User
-    {
-        $this->updatedAt = Carbon::now();
         return $this;
     }
 

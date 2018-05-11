@@ -5,10 +5,18 @@ App\Entity\Page:
       type: guid
 
   fields:
+    slug:
+      type: string
+      length: 191
+      unique: true
     title:
       type: string
     content:
       type: text
+    isDefault:
+      type: boolean
+      options:
+        default: false
     createdAt:
       type: carbondatetime
       nullable: true
