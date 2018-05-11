@@ -16,8 +16,10 @@ logout:
 defaultPage:
     path: /page/default
     controller: App\Controller\PageController::index
+    methods: [GET]
 getPage:
     path: /page/{slug}
     controller: App\Controller\PageController::getPage
+    methods: [GET]
     requirements:
       slug: '*.'
