@@ -4,7 +4,7 @@ namespace App\Handlers;
 
 use App\Commands\UserRegisterCommand;
 use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 
 /**
  * Class UserRegister

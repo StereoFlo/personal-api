@@ -38,7 +38,7 @@ services:
         - { name: kernel.event_listener, event: kernel.request }
 
     user.repo:
-      class: App\Repository\UserRepository
+      class: App\Repository\User\UserRepository
       arguments:
         - '@doctrine.orm.entity_manager'
 

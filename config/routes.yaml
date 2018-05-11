@@ -13,7 +13,11 @@ logout:
     path: /auth/logout
     controller: App\Controller\AuthController::logout
     methods: [POST]
-
-admin:
-    path: /admin/
-    controller: App\Controller\DefaultController::admin
+defaultPage:
+    path: /page/default
+    controller: App\Controller\PageController::index
+getPage:
+    path: /page/{slug}
+    controller: App\Controller\PageController::getPage
+    requirements:
+      slug: '*.'
