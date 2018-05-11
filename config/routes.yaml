@@ -22,4 +22,4 @@ getPage:
     controller: App\Controller\PageController::getPage
     methods: [GET]
     requirements:
-      slug: '*.'
+      slug: '.*'

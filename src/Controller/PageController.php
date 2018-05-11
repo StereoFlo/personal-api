@@ -45,7 +45,6 @@ class PageController
             return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
         }
 
-        $context['enable_max_depth'] = true;
         $data = $this->serializer->serialize(['success' => true, 'data' => $defaultPage], 'json');
 
         return JsonResponse::create(\json_decode($data));
@@ -62,6 +61,7 @@ class PageController
         if (empty($page)) {
             return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
         }
-        return JsonResponse::create(['success' => true, 'data' => $page]);
+        $data = $this->serializer->serialize(['success' => true, 'data' => $page], 'json');
+        return JsonResponse::create(\json_decode($data));
     }
 }
