@@ -37,6 +37,14 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.request }
 
+    serialization.config.loader:
+      class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+      arguments: [ '%kernel.root_dir%/config/serialization.yml' ]
+
+    serialization.metadata.factory:
+      class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+      arguments: ['@serialization.config.loader']
+
     user.repo:
       class: App\Repository\User\UserRepository
       arguments:

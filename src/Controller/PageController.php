@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Repository\Page\PageInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class PageController
@@ -17,13 +19,20 @@ class PageController
     private $pageRepo;
 
     /**
+     * @var Serializer
+     */
+    private $serializer;
+
+    /**
      * PageController constructor.
      *
-     * @param PageInterface $page
+     * @param PageInterface       $page
+     * @param SerializerInterface $serializer
      */
-    public function __construct(PageInterface $page)
+    public function __construct(PageInterface $page, SerializerInterface $serializer)
     {
-        $this->pageRepo = $page;
+        $this->pageRepo   = $page;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -35,7 +44,11 @@ class PageController
         if (empty($defaultPage)) {
             return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
         }
-        return JsonResponse::create(['success' => true, 'data' => $defaultPage]);
+
+        $context['enable_max_depth'] = true;
+        $data = $this->serializer->serialize(['success' => true, 'data' => $defaultPage], 'json');
+
+        return JsonResponse::create(\json_decode($data));
     }
 
     /**
