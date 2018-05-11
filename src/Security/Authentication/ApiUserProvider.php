@@ -15,16 +15,16 @@ class ApiUserProvider implements UserProviderInterface
 {
 
     /**
-     * @var \App\Repository\UserInterface
+     * @var \App\Repository\User\UserInterface
      */
     private $userRepository;
 
     /**
      * ApiUserProvider constructor.
      *
-     * @param \App\Repository\UserInterface $userRepository
+     * @param \App\Repository\User\UserInterface $userRepository
      */
-    public function __construct(\App\Repository\UserInterface $userRepository)
+    public function __construct(\App\Repository\User\UserInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }

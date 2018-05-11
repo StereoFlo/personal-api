@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Commands\UserRegisterCommand;
-use App\Repository\UserInterface;
+use App\Repository\User\UserInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;

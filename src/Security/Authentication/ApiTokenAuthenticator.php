@@ -2,7 +2,7 @@
 namespace App\Security\Authentication;
 
 use App\Entity\ApiToken;
-use App\Repository\UserInterface as UserInterfaceMain;
+use App\Repository\User\UserInterface as UserInterfaceMain;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

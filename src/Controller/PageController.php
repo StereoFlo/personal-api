@@ -33,9 +33,9 @@ class PageController
     {
         $defaultPage = $this->pageRepo->getDefaultPage();
         if (empty($defaultPage)) {
-            return JsonResponse::create(['success' => true, 'data' => $defaultPage]);
+            return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
         }
-        return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
+        return JsonResponse::create(['success' => true, 'data' => $defaultPage]);
     }
 
     /**
@@ -47,8 +47,8 @@ class PageController
     {
         $page = $this->pageRepo->getBySlug($slug);
         if (empty($page)) {
-            return JsonResponse::create(['success' => true, 'data' => $page]);
+            return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
         }
-        return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
+        return JsonResponse::create(['success' => true, 'data' => $page]);
     }
 }
