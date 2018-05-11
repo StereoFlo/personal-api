@@ -13,3 +13,7 @@ logout:
     path: /auth/logout
     controller: App\Controller\AuthController::logout
     methods: [POST]
+
+admin:
+    path: /admin
+    controller: App\Controller\DefaultController::admin

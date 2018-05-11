@@ -17,4 +17,12 @@ class DefaultController
     {
         return JsonResponse::create(['success' => true]);
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function admin()
+    {
+        return JsonResponse::create(['success' => true, 'message' => 'you are admin']);
+    }
 }
