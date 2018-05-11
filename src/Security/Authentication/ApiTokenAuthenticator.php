@@ -201,6 +201,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        // TODO: Implement supports() method.
+        return true;
     }
 }

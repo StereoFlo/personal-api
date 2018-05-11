@@ -15,5 +15,5 @@ logout:
     methods: [POST]
 
 admin:
-    path: /admin
+    path: /admin/
     controller: App\Controller\DefaultController::admin
