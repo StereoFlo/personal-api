@@ -201,6 +201,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        return true;
+        return (bool) $request->headers->get('X-Api-Token');
     }
 }
