@@ -9,12 +9,17 @@ use Ramsey\Uuid\Uuid;
  * Class Page
  * @package App\Entity
  */
-class Page
+class Page extends AbstractEntity
 {
     /**
      * @var string guid
      */
     private $pageId;
+
+    /**
+     * @var string
+     */
+    private $slug;
 
     /**
      * @var string
@@ -27,14 +32,19 @@ class Page
     private $content;
 
     /**
-     * @var Carbon
+     * @var bool
      */
-    private $createdAt;
+    private $isDefault = false;
 
     /**
      * @var Carbon
      */
-    private $updatedAt;
+    protected $createdAt;
+
+    /**
+     * @var Carbon
+     */
+    protected $updatedAt;
 
     /**
      * Page constructor.
@@ -42,8 +52,7 @@ class Page
     public function __construct()
     {
         $this->pageId = Uuid::uuid4();
-        $this->createdAt = Carbon::now();
-        $this->updatedAt = Carbon::now();
+        parent::__construct();
     }
 
     /**
@@ -52,22 +61,6 @@ class Page
     public function getPageId(): string
     {
         return $this->pageId;
-    }
-
-    /**
-     * @return Carbon
-     */
-    public function getCreatedAt(): Carbon
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return Carbon
-     */
-    public function getUpdatedAt(): Carbon
-    {
-        return $this->updatedAt;
     }
 
     /**
@@ -85,4 +78,54 @@ class Page
     {
         return $this->content;
     }
+
+    /**
+     * @return bool
+     */
+    public function getIsDefault(): bool
+    {
+        return $this->isDefault;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     *
+     * @return Page
+     */
+    public function setSlug(string $slug): Page
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return Page
+     */
+    public function setTitle(string $title): Page
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return Page
+     */
+    public function setContent(string $content): Page
+    {
+        $this->content = $content;
+        return $this;
+    }
+
 }
