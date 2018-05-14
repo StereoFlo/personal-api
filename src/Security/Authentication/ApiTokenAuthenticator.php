@@ -2,7 +2,7 @@
 namespace App\Security\Authentication;
 
 use App\Entity\ApiToken;
-use App\Repository\UserInterface as UserInterfaceMain;
+use App\Repository\User\UserInterface as UserInterfaceMain;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -201,6 +201,6 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request)
     {
-        // TODO: Implement supports() method.
+        return (bool) $request->headers->get('X-Api-Token');
     }
 }

@@ -37,10 +37,13 @@ services:
       tags:
         - { name: kernel.event_listener, event: kernel.request }
 
-    user.repo:
-      class: App\Repository\UserRepository
-      arguments:
-        - '@doctrine.orm.entity_manager'
+    serialization.config.loader:
+      class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+      arguments: [ '%kernel.root_dir%/config/serialization.yml' ]
+
+    serialization.metadata.factory:
+      class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+      arguments: ['@serialization.config.loader']
 
     app.api_authenticator:
       class: App\Security\Authentication\ApiTokenAuthenticator
@@ -58,9 +61,6 @@ services:
       class: App\Entity\User
       factory: ['@app.current_user_factory', getUser]
 
-    foo.user.register_user_handler:
-        class: App\Handlers\UserRegisterHandler
-        arguments:
-            - '@user.repo'
-        tags:
-            - { name: tactician.handler, command: App\Commands\UserRegisterCommand }
+imports:
+    - { resource: 'handlers.yml' }
+    - { resource: 'repos.yml' }

@@ -1,0 +1,10 @@
+services:
+    user.repo:
+      class: App\Repository\User\UserRepository
+      arguments:
+        - '@doctrine.orm.entity_manager'
+
+    page.repo:
+      class: App\Repository\Page\PageRepository
+      arguments:
+        - '@doctrine.orm.entity_manager'

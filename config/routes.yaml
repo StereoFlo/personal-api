@@ -1,6 +1,9 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+admin:
+    path: /admin/
+    controller: App\Controller\DefaultController::admin
 register:
     path: /auth/register
     controller: App\Controller\AuthController::register
@@ -13,3 +16,20 @@ logout:
     path: /auth/logout
     controller: App\Controller\AuthController::logout
     methods: [POST]
+defaultPage:
+    path: /page/default
+    controller: App\Controller\PageController::getDefault
+    methods: [GET]
+getPage:
+    path: /page/{slug}
+    controller: App\Controller\PageController::getBy
+    methods: [GET]
+    requirements:
+      slug: '.*'
+
+############ ADMIN ############
+
+adminPageList:
+    path: /admin/page/list
+    controller: App\Controller\PageController::getList
+    methods: [GET]

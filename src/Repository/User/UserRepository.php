@@ -1,36 +1,21 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\User;
 
 use App\Entity\ApiToken;
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SharedRepository;
 
 /**
  * Class UserRepository
  * @package App\Repository
  */
-class UserRepository implements UserInterface
+class UserRepository extends SharedRepository implements UserInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $manager;
-
-    /**
-     * UserRepository constructor.
-     *
-     * @param EntityManagerInterface $manager
-     */
-    public function __construct(EntityManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
-
     /**
      * @param User $user
      *
-     * @return User
+     * @return self
      */
     public function save(User $user): UserRepository
     {

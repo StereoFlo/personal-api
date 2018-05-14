@@ -6,6 +6,7 @@ use HttpInvalidParamException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
@@ -31,7 +32,12 @@ class ExceptionListener
             $event->setResponse($response);
         }
         if ($exception instanceof UnauthorizedHttpException) {
-            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 401);
+            $message = $exception->getMessage() ? $exception->getMessage() : 'Пользователь не найден';
+            $response = JsonResponse::create(['success' => false, 'message' => $message], 401);
+            $event->setResponse($response);
+        }
+        if ($exception instanceof NotFoundHttpException) {
+            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], $exception->getStatusCode());
             $event->setResponse($response);
         }
         if ($exception instanceof HttpInvalidParamException) {
