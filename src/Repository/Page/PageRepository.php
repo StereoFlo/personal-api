@@ -41,4 +41,12 @@ class PageRepository extends SharedRepository implements PageInterface
     {
         return $this->manager->getRepository(Page::class)->findOneBy(['isDefault' => true]);
     }
+
+    /**
+     * @return Page[]|null
+     */
+    public function getList(): ?array
+    {
+        return $this->manager->getRepository(Page::class)->findAll();
+    }
 }

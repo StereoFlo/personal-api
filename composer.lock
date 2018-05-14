@@ -836,16 +836,16 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "v1.7.1",
+            "version": "v1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "d3e8b903233d5fb7f00193c95eec501f27c0b908"
+                "reference": "3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/d3e8b903233d5fb7f00193c95eec501f27c0b908",
-                "reference": "d3e8b903233d5fb7f00193c95eec501f27c0b908",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
+                "reference": "3e7656c5adfd9b7d0d8757aa1e9e8daf43a6f200",
                 "shasum": ""
             },
             "require": {
@@ -905,7 +905,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2018-05-07T12:37:11+00:00"
+            "time": "2018-05-09T21:04:56+00:00"
         },
         {
             "name": "doctrine/orm",

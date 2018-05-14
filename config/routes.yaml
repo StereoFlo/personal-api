@@ -18,11 +18,18 @@ logout:
     methods: [POST]
 defaultPage:
     path: /page/default
-    controller: App\Controller\PageController::index
+    controller: App\Controller\PageController::getDefault
     methods: [GET]
 getPage:
     path: /page/{slug}
-    controller: App\Controller\PageController::getPage
+    controller: App\Controller\PageController::getBy
     methods: [GET]
     requirements:
       slug: '.*'
+
+############ ADMIN ############
+
+adminPageList:
+    path: /admin/page/list
+    controller: App\Controller\PageController::getList
+    methods: [GET]

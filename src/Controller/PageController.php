@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Repository\Page\PageInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class PageController
@@ -19,35 +17,33 @@ class PageController
     private $pageRepo;
 
     /**
-     * @var Serializer
+     * @var AbstractController
      */
-    private $serializer;
+    private $controller;
 
     /**
      * PageController constructor.
      *
-     * @param PageInterface       $page
-     * @param SerializerInterface $serializer
+     * @param PageInterface      $page
+     * @param AbstractController $controller
      */
-    public function __construct(PageInterface $page, SerializerInterface $serializer)
+    public function __construct(PageInterface $page, AbstractController $controller)
     {
         $this->pageRepo   = $page;
-        $this->serializer = $serializer;
+        $this->controller = $controller;
     }
 
     /**
      * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function getDefault(): JsonResponse
     {
         $defaultPage = $this->pageRepo->getDefaultPage();
         if (empty($defaultPage)) {
-            return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
+            return $this->controller->errorJson('page does not found', 404);
         }
 
-        $data = $this->serializer->serialize(['success' => true, 'data' => $defaultPage], 'json');
-
-        return JsonResponse::create(\json_decode($data));
+        return $this->controller->json($defaultPage);
     }
 
     /**
@@ -55,13 +51,21 @@ class PageController
      *
      * @return JsonResponse
      */
-    public function getPage(string $slug): JsonResponse
+    public function getBy(string $slug): JsonResponse
     {
         $page = $this->pageRepo->getBySlug($slug);
         if (empty($page)) {
-            return JsonResponse::create(['success' => false, 'message' => 'page does not found'], 404);
+            return $this->controller->errorJson('page does not found', 404);
         }
-        $data = $this->serializer->serialize(['success' => true, 'data' => $page], 'json');
-        return JsonResponse::create(\json_decode($data));
+        return $this->controller->json($page);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getList(): JsonResponse
+    {
+        $list = $this->pageRepo->getList();
+        return $this->controller->json($list);
     }
 }

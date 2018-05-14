@@ -28,4 +28,9 @@ interface PageInterface
      * @return Page|null
      */
     public function getDefaultPage(): ?Page ;
+
+    /**
+     * @return Page[]|null
+     */
+    public function getList(): ?array ;
 }
