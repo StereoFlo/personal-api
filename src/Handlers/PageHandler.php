@@ -28,6 +28,9 @@ class PageHandler
         $this->pageRepo = $page;
     }
 
+    /**
+     * @param PageCommand $command
+     */
     public function handle(PageCommand $command)
     {
         if (empty($command->getPageId())) {
