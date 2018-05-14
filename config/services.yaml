@@ -45,11 +45,6 @@ services:
       class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
       arguments: ['@serialization.config.loader']
 
-    user.repo:
-      class: App\Repository\User\UserRepository
-      arguments:
-        - '@doctrine.orm.entity_manager'
-
     app.api_authenticator:
       class: App\Security\Authentication\ApiTokenAuthenticator
       arguments: ['@user.repo']
@@ -66,9 +61,6 @@ services:
       class: App\Entity\User
       factory: ['@app.current_user_factory', getUser]
 
-    foo.user.register_user_handler:
-        class: App\Handlers\UserRegisterHandler
-        arguments:
-            - '@user.repo'
-        tags:
-            - { name: tactician.handler, command: App\Commands\UserRegisterCommand }
+imports:
+    - { resource: 'handlers.yml' }
+    - { resource: 'repos.yml' }

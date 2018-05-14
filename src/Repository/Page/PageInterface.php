@@ -25,6 +25,13 @@ interface PageInterface
     public function getBySlug(string $slug): ?Page ;
 
     /**
+     * @param string $pageId
+     *
+     * @return Page|null
+     */
+    public function getById(string $pageId): ?Page ;
+
+    /**
      * @return Page|null
      */
     public function getDefaultPage(): ?Page ;

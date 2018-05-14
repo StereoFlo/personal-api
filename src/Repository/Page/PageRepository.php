@@ -35,6 +35,16 @@ class PageRepository extends SharedRepository implements PageInterface
     }
 
     /**
+     * @param string $pageId
+     *
+     * @return Page|null
+     */
+    public function getById(string $pageId): ?Page
+    {
+        return $this->manager->getRepository(Page::class)->find($pageId);
+    }
+
+    /**
      * @return Page|null
      */
     public function getDefaultPage(): ?Page
