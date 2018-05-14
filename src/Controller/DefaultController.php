@@ -20,4 +20,14 @@ class DefaultController
             'message' => 'page does not found'
         ], 404);
     }
+    /**
+     * @return JsonResponse
+     */
+    public function admin(): JsonResponse
+    {
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'admin'
+        ], 200);
+    }
 }

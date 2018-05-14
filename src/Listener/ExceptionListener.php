@@ -31,7 +31,8 @@ class ExceptionListener
             $event->setResponse($response);
         }
         if ($exception instanceof UnauthorizedHttpException) {
-            $response = JsonResponse::create(['success' => false, 'message' => $exception->getMessage()], 401);
+            $message = $exception->getMessage() ? $exception->getMessage() : 'Пользователь не найден';
+            $response = JsonResponse::create(['success' => false, 'message' => $message], 401);
             $event->setResponse($response);
         }
         if ($exception instanceof HttpInvalidParamException) {
