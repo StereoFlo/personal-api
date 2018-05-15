@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Commands\PageCommand;
 use App\Repository\Page\PageInterface;
+use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PageController
@@ -11,6 +14,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class PageController
 {
+    /**
+     * @var CommandBus
+     */
+    private $bus;
+
     /**
      * @var PageInterface
      */
@@ -24,11 +32,13 @@ class PageController
     /**
      * PageController constructor.
      *
+     * @param CommandBus         $bus
      * @param PageInterface      $page
      * @param AbstractController $controller
      */
-    public function __construct(PageInterface $page, AbstractController $controller)
+    public function __construct(CommandBus $bus, PageInterface $page, AbstractController $controller)
     {
+        $this->bus        = $bus;
         $this->pageRepo   = $page;
         $this->controller = $controller;
     }
@@ -67,5 +77,37 @@ class PageController
     {
         $list = $this->pageRepo->getList();
         return $this->controller->json($list);
+    }
+
+    /**
+     * @param string $pageId
+     *
+     * @return JsonResponse
+     */
+    public function getPageBy(string $pageId): JsonResponse
+    {
+        $page = $this->pageRepo->getById($pageId);
+        if (empty($page)) {
+            return $this->controller->errorJson('page not found', 404);
+        }
+        return $this->controller->json($page);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function savePage(Request $request): JsonResponse
+    {
+        $pageId    = $request->request->get('pageId');
+        $title     = $request->request->get('title');
+        $content   = $request->request->get('content');
+        $slug      = $request->request->get('slug');
+        $isDefault = $request->request->getBoolean('isDefault');
+
+        $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $isDefault));
+
+        return $this->controller->acceptJson('page saved successfully');
     }
 }
