@@ -78,6 +78,13 @@ class AbstractController
      */
     public function acceptJson(string $message, int $code = 202, $additionalData = null): JsonResponse
     {
-        return $this->errorJson($message, $code, $additionalData);
+        $data = [
+            'success' => true,
+            'message' => $message,
+        ];
+        if ($additionalData) {
+            $data['data'] = $additionalData;
+        }
+        return new JsonResponse($data, $code);
     }
 }
