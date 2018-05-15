@@ -33,3 +33,15 @@ adminPageList:
     path: /admin/page/list
     controller: App\Controller\PageController::getList
     methods: [GET]
+
+adminGetPage:
+    path: /admin/page/{pageId}
+    controller: App\Controller\PageController::getPageBy
+    methods: [GET]
+    requirements:
+      pageId: '.*'
+
+adminPageSave:
+    path: /admin/page/save
+    controller: App\Controller\PageController::savePage
+    methods: [POST]

@@ -51,18 +51,40 @@ class AbstractController
     }
 
     /**
-     * @param     $message
-     * @param     $data
-     * @param int $code
+     * @param string $message
+     * @param int    $code
+     * @param null   $additionalData
      *
      * @return JsonResponse
      */
-    public function errorJson($message, $data, int $code = 500): JsonResponse
+    public function errorJson(string $message, int $code = 500, $additionalData = null): JsonResponse
     {
-        return new JsonResponse([
+        $data = [
             'success' => false,
             'message' => $message,
-            'data'    => $data
-        ], $code);
+        ];
+        if ($additionalData) {
+            $data['data'] = $additionalData;
+        }
+        return new JsonResponse($data, $code);
+    }
+
+    /**
+     * @param string $message
+     * @param int    $code
+     * @param null   $additionalData
+     *
+     * @return JsonResponse
+     */
+    public function acceptJson(string $message, int $code = 202, $additionalData = null): JsonResponse
+    {
+        $data = [
+            'success' => true,
+            'message' => $message,
+        ];
+        if ($additionalData) {
+            $data['data'] = $additionalData;
+        }
+        return new JsonResponse($data, $code);
     }
 }
