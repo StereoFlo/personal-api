@@ -43,5 +43,5 @@ adminGetPage:
 
 adminPageSave:
     path: /admin/page/save
-    constroller: App\Controller\PageController::savePage
+    controller: App\Controller\PageController::savePage
     methods: [POST]
