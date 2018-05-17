@@ -182,5 +182,16 @@ class User extends AbstractEntity
         return $this;
     }
 
+    /**
+     * @param ApiToken $apiToken
+     *
+     * @return User
+     */
+    public function setApiToken(?ApiToken $apiToken): User
+    {
+        $this->apiToken = $apiToken;
+        return $this;
+    }
+
 
 }

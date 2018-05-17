@@ -27,15 +27,22 @@ class AuthController
     private $userRepository;
 
     /**
+     * @var AbstractController
+     */
+    private $controller;
+
+    /**
      * AuthController constructor.
      *
-     * @param CommandBus    $bus
-     * @param UserInterface $userRepository
+     * @param CommandBus         $bus
+     * @param UserInterface      $userRepository
+     * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, UserInterface $userRepository)
+    public function __construct(CommandBus $bus, UserInterface $userRepository, AbstractController $controller)
     {
-        $this->bus = $bus;
+        $this->bus            = $bus;
         $this->userRepository = $userRepository;
+        $this->controller     = $controller;
     }
 
     /**
@@ -51,7 +58,7 @@ class AuthController
 
         $this->bus->handle(new UserRegisterCommand($username, $email, $password));
 
-        return new JsonResponse(['success' => true, 'message' => 'success registred']);
+        return $this->controller->acceptJson('success registred');
     }
 
     /**
@@ -76,19 +83,30 @@ class AuthController
         }
 
         if (!\password_verify($password, $user->getPassword())) {
-            throw new \Exception('invalid.password');
+            throw new UnauthorizedHttpException('invalid.password');
         }
 
         $this->userRepository->save($user->setLastLogin());
 
-        return new JsonResponse(['success' => true, 'message' => 'success logged in', 'data' => ['token' => $user->getApiToken()->getKey()]]);
+        return $this->controller->acceptJson('success logged in', 202, ['token' => $user->getApiToken()->getKey()]);
     }
 
     /**
+     * @param Request $request
+     *
      * @return JsonResponse
+     * @throws HttpInvalidParamException
      */
-    public function logout(): JsonResponse
+    public function logout(Request $request): JsonResponse
     {
-        return JsonResponse::create(['success' => true]);
+        $token = $request->request->get('token');
+        if (empty($token)) {
+            throw new HttpInvalidParamException('token cannot be null');
+        }
+        $user = $this->userRepository->getByToken($token);
+        $user->setApiToken(null);
+        $this->userRepository->save($user);
+
+        return $this->controller->acceptJson('success logged out');
     }
 }
