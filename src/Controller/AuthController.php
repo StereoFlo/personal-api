@@ -58,7 +58,7 @@ class AuthController
 
         $this->bus->handle(new UserRegisterCommand($username, $email, $password));
 
-        return $this->controller->acceptJson('success registred');
+        return $this->controller->acceptJson('registred.success');
     }
 
     /**
@@ -88,7 +88,7 @@ class AuthController
 
         $this->userRepository->save($user->setLastLogin());
 
-        return $this->controller->acceptJson('success logged in', 202, ['token' => $user->getApiToken()->getKey()]);
+        return $this->controller->acceptJson('logged.in', 202, ['token' => $user->getApiToken()->getKey()]);
     }
 
     /**
@@ -101,12 +101,12 @@ class AuthController
     {
         $token = $request->request->get('token');
         if (empty($token)) {
-            throw new HttpInvalidParamException('token cannot be null');
+            throw new HttpInvalidParamException('token.empty');
         }
         $user = $this->userRepository->getByToken($token);
         $user->setApiToken(null);
         $this->userRepository->save($user);
 
-        return $this->controller->acceptJson('success logged out');
+        return $this->controller->acceptJson('logged.out');
     }
 }

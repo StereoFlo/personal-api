@@ -1,3 +1,12 @@
 page.not.found: Страница не найдена
+token.empty: Токен не может быть пустым
+invalid.password: Неверный пароль
+login.not.found: Пользователь не существует
+form.input.empty: Вы что-то забыли указать
+
+logged.out: Вы успешно вышли из системы
+logged.in: Вы успешно вошли в систему
+
+registred.success: Вы успешно зарегистрированы
 
 page.saved: Страница сохранена
