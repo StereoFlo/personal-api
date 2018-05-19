@@ -5,6 +5,9 @@ App\Entity\Page:
       type: guid
 
   fields:
+    parentPageId:
+      type: guid
+      nullable: true
     slug:
       type: string
       length: 191

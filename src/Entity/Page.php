@@ -17,6 +17,13 @@ class Page extends AbstractEntity
     private $pageId;
 
     /**
+     * guid the parent page
+     *
+     * @var string
+     */
+    private $parentPageId;
+
+    /**
      * @var string
      */
     private $slug;
@@ -125,6 +132,25 @@ class Page extends AbstractEntity
     public function setContent(string $content): Page
     {
         $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getParentPageId(): ?string
+    {
+        return $this->parentPageId;
+    }
+
+    /**
+     * @param string $parentPageId
+     *
+     * @return Page
+     */
+    public function setParentPageId(?string $parentPageId): Page
+    {
+        $this->parentPageId = $parentPageId;
         return $this;
     }
 
