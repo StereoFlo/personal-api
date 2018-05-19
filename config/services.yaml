@@ -29,6 +29,8 @@ services:
 
     app.exceprion.listener:
       class: App\Listener\ExceptionListener
+      arguments:
+        - '@translator'
       tags:
           - { name: kernel.event_listener, event: kernel.exception }
 

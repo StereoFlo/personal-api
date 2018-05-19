@@ -50,7 +50,7 @@ class PageController
     {
         $defaultPage = $this->pageRepo->getDefaultPage();
         if (empty($defaultPage)) {
-            return $this->controller->errorJson('page does not found', 404);
+            return $this->controller->errorJson('page.not.found', 404);
         }
 
         return $this->controller->json($defaultPage);
@@ -65,7 +65,7 @@ class PageController
     {
         $page = $this->pageRepo->getBySlug($slug);
         if (empty($page)) {
-            return $this->controller->errorJson('page does not found', 404);
+            return $this->controller->errorJson('page.not.found', 404);
         }
         return $this->controller->json($page);
     }
@@ -88,7 +88,7 @@ class PageController
     {
         $page = $this->pageRepo->getById($pageId);
         if (empty($page)) {
-            return $this->controller->errorJson('page not found', 404);
+            return $this->controller->errorJson('page.not.found', 404);
         }
         return $this->controller->json($page);
     }
@@ -108,6 +108,6 @@ class PageController
 
         $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $isDefault));
 
-        return $this->controller->acceptJson('page saved successfully');
+        return $this->controller->acceptJson('page.saved:');
     }
 }

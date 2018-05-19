@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class AbstractController
@@ -18,13 +19,20 @@ class AbstractController
     private $serializer;
 
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
      * AbstractController constructor.
      *
      * @param SerializerInterface $serializer
+     * @param TranslatorInterface $translator
      */
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer, TranslatorInterface $translator)
     {
         $this->serializer = $serializer;
+        $this->translator = $translator;
     }
 
     /**
@@ -61,7 +69,7 @@ class AbstractController
     {
         $data = [
             'success' => false,
-            'message' => $message,
+            'message' => $this->translator->trans($message),
         ];
         if ($additionalData) {
             $data['data'] = $additionalData;
@@ -80,7 +88,7 @@ class AbstractController
     {
         $data = [
             'success' => true,
-            'message' => $message,
+            'message' => $this->translator->trans($message),
         ];
         if ($additionalData) {
             $data['data'] = $additionalData;
