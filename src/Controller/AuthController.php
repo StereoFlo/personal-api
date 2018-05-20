@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Commands\UserRegisterCommand;
+use App\Entity\ApiToken;
 use App\Repository\User\UserInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
@@ -103,7 +104,7 @@ class AuthController
         if (empty($token)) {
             throw new HttpInvalidParamException('token.empty');
         }
-        $user = $this->userRepository->getByToken($token);
+        $user = $this->userRepository->getByToken(new ApiToken($token));
         $user->setApiToken(null);
         $this->userRepository->save($user);
 
