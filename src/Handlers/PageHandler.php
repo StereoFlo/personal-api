@@ -29,6 +29,7 @@ class PageHandler
     }
 
     /**
+     * @todo need a refactor
      * @param PageCommand $command
      */
     public function handle(PageCommand $command)
@@ -37,8 +38,15 @@ class PageHandler
             $page = $this->getPage()
                 ->setTitle($command->getTitle())
                 ->setContent($command->getContent())
-                ->setSlug($command->getSlug())
-                ->setUpdatedAt()
+                ->setSlug($command->getSlug());
+            if ($command->getParentPageId()) {
+                $parentPage = $this->pageRepo->getById($command->getParentPageId());
+                if (empty($parentPage)) {
+                    throw new NotFoundHttpException('parent page does not found'); //todo use translation
+                }
+                $page->setParentPageId($parentPage);
+            }
+            $page->setUpdatedAt()
                 ->setCreatedAt();
             $this->pageRepo->save($page);
             return;
@@ -46,7 +54,15 @@ class PageHandler
 
         $page = $this->pageRepo->getById($command->getPageId());
         if (empty($page)) {
-            throw new NotFoundHttpException('page does not found');
+            throw new NotFoundHttpException('page.not.found');
+        }
+
+        if ($command->getParentPageId()) {
+            $parentPage = $this->pageRepo->getById($command->getParentPageId());
+            if (empty($parentPage)) {
+                throw new NotFoundHttpException('parent page does not found'); //todo use translation
+            }
+            $page->setParentPageId($parentPage);
         }
 
         $page->setTitle($command->getTitle())

@@ -100,13 +100,14 @@ class PageController
      */
     public function savePage(Request $request): JsonResponse
     {
-        $pageId    = $request->request->get('pageId');
-        $title     = $request->request->get('title');
-        $content   = $request->request->get('content');
-        $slug      = $request->request->get('slug');
-        $isDefault = $request->request->getBoolean('isDefault');
+        $pageId       = $request->request->get('pageId');
+        $title        = $request->request->get('title');
+        $content      = $request->request->get('content');
+        $slug         = $request->request->get('slug');
+        $parentPageId = $request->request->get('parentPageId');
+        $isDefault    = $request->request->getBoolean('isDefault');
 
-        $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $isDefault));
+        $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $parentPageId, $isDefault));
 
         return $this->controller->acceptJson('page.saved:');
     }

@@ -14,6 +14,11 @@ class PageCommand
     private $pageId;
 
     /**
+     * @var string|null
+     */
+    private $parentPageId;
+
+    /**
      * @var string
      */
     private $title;
@@ -40,9 +45,10 @@ class PageCommand
      * @param string      $title
      * @param string      $content
      * @param string      $slug
+     * @param null|string $parentPageId
      * @param bool        $isDefault
      */
-    public function __construct(?string $pageId, string $title, string $content, string $slug, bool $isDefault = false)
+    public function __construct(?string $pageId, string $title, string $content, string $slug, ?string $parentPageId, bool $isDefault = false)
     {
         $this->pageId    = $pageId;
         $this->title     = $title;
@@ -89,5 +95,13 @@ class PageCommand
     public function getIsDefault(): bool
     {
         return $this->isDefault;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getParentPageId(): ?string
+    {
+        return $this->parentPageId;
     }
 }
