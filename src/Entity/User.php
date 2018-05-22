@@ -183,13 +183,17 @@ class User extends AbstractEntity
     }
 
     /**
-     * @param ApiToken $apiToken
+     * @param bool $isLogout
      *
      * @return User
      */
-    public function setApiToken(?ApiToken $apiToken): User
+    public function setApiToken(bool $isLogout = false): User
     {
-        $this->apiToken = $apiToken;
+        if (!$isLogout) {
+            $this->apiToken = new ApiToken();
+            return $this;
+        }
+        $this->apiToken = null;
         return $this;
     }
 
