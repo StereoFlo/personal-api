@@ -18,6 +18,13 @@ interface PageInterface
     public function save(Page $page): PageRepository ;
 
     /**
+     * @param Page $page
+     *
+     * @return PageRepository
+     */
+    public function delete(Page $page): PageRepository ;
+
+    /**
      * @param string $slug
      *
      * @return Page|null

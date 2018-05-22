@@ -42,3 +42,8 @@ adminPageSave:
     path: /admin/page/save
     controller: App\Controller\PageController::savePage
     methods: [POST]
+
+adminPageDelete:
+    path: /admin/page/delete
+    controller: App\Controller\PageController::deletePage
+    methods: [POST]

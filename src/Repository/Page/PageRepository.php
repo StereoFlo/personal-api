@@ -25,6 +25,19 @@ class PageRepository extends SharedRepository implements PageInterface
     }
 
     /**
+     * @param Page $page
+     *
+     * @return PageRepository
+     */
+    public function delete(Page $page): PageRepository
+    {
+        $this->manager->remove($page);
+        $this->manager->flush();
+
+        return $this;
+    }
+
+    /**
      * @param string $slug
      *
      * @return Page|null

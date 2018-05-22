@@ -109,6 +109,22 @@ class PageController
 
         $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $parentPageId, $isDefault));
 
-        return $this->controller->acceptJson('page.saved:');
+        return $this->controller->acceptJson('page.saved');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function deletePage(Request $request): JsonResponse
+    {
+        $pageId = $request->request->get('pageId');
+        $page = $this->pageRepo->getById($pageId);
+        if (empty($page)) {
+            return $this->controller->errorJson('page.not.found', 422);
+        }
+        $this->pageRepo->delete($page);
+        return $this->controller->acceptJson('page.deleted');
     }
 }
