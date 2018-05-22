@@ -105,6 +105,9 @@ class AuthController
             throw new HttpInvalidParamException('token.empty');
         }
         $user = $this->userRepository->getByToken(new ApiToken($token));
+        if (empty($user)) {
+            return $this->controller->acceptJson('logged.out');
+        }
         $user->setApiToken(true);
         $this->userRepository->save($user);
 
