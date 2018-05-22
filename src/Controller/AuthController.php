@@ -87,7 +87,7 @@ class AuthController
             throw new UnauthorizedHttpException('invalid.password');
         }
 
-        $this->userRepository->save($user->setLastLogin());
+        $this->userRepository->save($user->setLastLogin()->setApiToken());
 
         return $this->controller->acceptJson('logged.in', 202, ['token' => $user->getApiToken()->getKey()]);
     }
@@ -105,7 +105,7 @@ class AuthController
             throw new HttpInvalidParamException('token.empty');
         }
         $user = $this->userRepository->getByToken(new ApiToken($token));
-        $user->setApiToken(null);
+        $user->setApiToken(true);
         $this->userRepository->save($user);
 
         return $this->controller->acceptJson('logged.out');
