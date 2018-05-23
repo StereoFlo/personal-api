@@ -1,0 +1,12 @@
+services:
+  abstract.controller:
+    class: App\Controller\AbstractController
+    arguments:
+      - '@serializer'
+      - '@translator'
+  user.controller:
+    class: App\Controller\UserController
+    arguments:
+      - '@app.current_user'
+      - '@user.repo'
+      - '@abstract.controller'

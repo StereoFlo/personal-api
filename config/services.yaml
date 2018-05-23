@@ -66,3 +66,4 @@ services:
 imports:
     - { resource: 'handlers.yml' }
     - { resource: 'repos.yml' }
+    - { resource: 'controllers.yml' }
