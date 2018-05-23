@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Commands\PageCommand;
 use App\Repository\Page\PageInterface;
 use League\Tactician\CommandBus;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class PageController
@@ -50,7 +52,7 @@ class PageController
     {
         $defaultPage = $this->pageRepo->getDefaultPage();
         if (empty($defaultPage)) {
-            return $this->controller->errorJson('page.not.found', 404);
+            throw new NotFoundHttpException('page.not.found');
         }
 
         return $this->controller->json($defaultPage);
@@ -65,7 +67,7 @@ class PageController
     {
         $page = $this->pageRepo->getBySlug($slug);
         if (empty($page)) {
-            return $this->controller->errorJson('page.not.found', 404);
+            throw new NotFoundHttpException('page.not.found');
         }
         return $this->controller->json($page);
     }
@@ -88,7 +90,7 @@ class PageController
     {
         $page = $this->pageRepo->getById($pageId);
         if (empty($page)) {
-            return $this->controller->errorJson('page.not.found', 404);
+            throw new NotFoundHttpException('page.not.found');
         }
         return $this->controller->json($page);
     }
@@ -113,16 +115,22 @@ class PageController
     }
 
     /**
-     * @param Request $request
+     * @param string $pageId
      *
      * @return JsonResponse
      */
-    public function deletePage(Request $request): JsonResponse
+    public function deletePage(string $pageId): JsonResponse
     {
-        $pageId = $request->request->get('pageId');
+        if (!Uuid::isValid($pageId)) {
+            throw new NotFoundHttpException('page.not.found');
+        }
+        if (empty($pageId)) {
+            throw new NotFoundHttpException('page.not.found');
+        }
+
         $page = $this->pageRepo->getById($pageId);
         if (empty($page)) {
-            return $this->controller->errorJson('page.not.found', 422);
+            throw new NotFoundHttpException('page.not.found');
         }
         $this->pageRepo->delete($page);
         return $this->controller->acceptJson('page.deleted');

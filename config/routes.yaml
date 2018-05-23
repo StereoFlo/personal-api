@@ -44,6 +44,8 @@ adminPageSave:
     methods: [POST]
 
 adminPageDelete:
-    path: /admin/page/delete
+    path: /admin/page/{pageId}/delete
     controller: App\Controller\PageController::deletePage
-    methods: [POST]
+    methods: [DELETE]
+    requirements:
+      pageId: '.*'
