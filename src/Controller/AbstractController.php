@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -24,15 +25,22 @@ class AbstractController
     private $translator;
 
     /**
+     * @var User|null
+     */
+    private $currentUser;
+
+    /**
      * AbstractController constructor.
      *
      * @param SerializerInterface $serializer
      * @param TranslatorInterface $translator
+     * @param User|null           $user
      */
-    public function __construct(SerializerInterface $serializer, TranslatorInterface $translator)
+    public function __construct(SerializerInterface $serializer, TranslatorInterface $translator, ?User $user)
     {
-        $this->serializer = $serializer;
-        $this->translator = $translator;
+        $this->serializer  = $serializer;
+        $this->translator  = $translator;
+        $this->currentUser = $user;
     }
 
     /**
@@ -94,5 +102,13 @@ class AbstractController
             $data['data'] = $additionalData;
         }
         return new JsonResponse($data, $code);
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getCurrentUser(): ?User
+    {
+        return $this->currentUser;
     }
 }

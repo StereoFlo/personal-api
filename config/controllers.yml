@@ -4,9 +4,16 @@ services:
     arguments:
       - '@serializer'
       - '@translator'
+      - '@App\Entity\User'
   user.controller:
     class: App\Controller\UserController
     arguments:
-      - '@app.current_user'
+      - '@App\Entity\User'
       - '@user.repo'
+      - '@abstract.controller'
+  page.controller:
+    class: App\Controller\PageController
+    arguments:
+      - '@tactician.commandbus'
+      - '@page.repo'
       - '@abstract.controller'

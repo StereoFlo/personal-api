@@ -23,6 +23,10 @@ getPage:
     methods: [GET]
     requirements:
       slug: '.*'
+getUser:
+    path: /user
+    controller: App\Controller\UserController::getUser
+    methods: [GET]
 
 ############ ADMIN ############
 

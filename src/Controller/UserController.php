@@ -46,9 +46,9 @@ class UserController
      */
     public function getUser(): JsonResponse
     {
-        if (empty($this->user)) {
+        if (empty($this->controller->getCurrentUser())) {
             return $this->controller->errorJson('user.empty', 401);
         }
-        return $this->controller->json($this->user);
+        return $this->controller->json($this->controller->getCurrentUser());
     }
 }
