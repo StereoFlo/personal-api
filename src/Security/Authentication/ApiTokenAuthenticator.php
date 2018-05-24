@@ -54,7 +54,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        return new JsonResponse(['error' => 'Требуется авторизация'], 401);
+        return new JsonResponse(['success' => false, 'message' => 'Требуется авторизация'], 401);
     }
 
     /**
@@ -149,7 +149,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['error' => 'Токен невалиден'], 403);
+        return new JsonResponse(['success' => false, 'message' => 'Токен невалиден'], 403);
     }
 
     /**
