@@ -49,6 +49,6 @@ class UserController
         if (empty($this->controller->getCurrentUser())) {
             return $this->controller->errorJson('user.empty', 401);
         }
-        return $this->controller->json($this->controller->getCurrentUser());
+        return $this->controller->json($this->controller->getCurrentUser(), 'user-public');
     }
 }

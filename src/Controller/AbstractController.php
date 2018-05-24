@@ -57,12 +57,11 @@ class AbstractController
         if ($serializationGroup) {
             $context['groups'] = [$serializationGroup];
         }
-        $data = [
+        $data = $this->serializer->serialize([
             'success' => true,
             'message' => '',
             'data'    => $data,
-        ];
-        $data = $this->serializer->serialize($data, 'json', $context);
+        ], 'json', $context);
         return new JsonResponse($data, $code, [], true);
     }
 

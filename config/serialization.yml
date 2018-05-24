@@ -1,6 +1,15 @@
-App\Entity\Page:
+App\Entity\User:
     attributes:
-      pageId:
-        groups: ['page']
-      title:
-        groups: ['page']
+        userId:
+            groups: ['user-public']
+        username:
+            groups: ['user-public']
+        email:
+            groups: ['user-public']
+        roles:
+            groups: ['user-public']
+
+App\Entity\Roles:
+    attributes:
+        list:
+            groups: ['user-public']
