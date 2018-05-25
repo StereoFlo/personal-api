@@ -89,7 +89,7 @@ class AuthController
 
         $this->userRepository->save($user->setLastLogin()->setApiToken());
 
-        return $this->controller->acceptJson('logged.in', 202, $user);
+        return $this->controller->json($user, 'user-public', 202);
     }
 
     /**
