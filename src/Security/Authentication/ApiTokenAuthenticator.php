@@ -2,7 +2,7 @@
 namespace App\Security\Authentication;
 
 use App\Entity\ApiToken;
-use App\Repository\User\UserInterface as UserInterfaceMain;
+use App\Repository\User\UserReadInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +20,16 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 {
     /**
-     * @var UserInterfaceMain
+     * @var UserReadInterface
      */
     private $userRepository;
 
     /**
      * ApiTokenAuthenticator constructor.
      *
-     * @param UserInterfaceMain $userRepository
+     * @param UserReadInterface $userRepository
      */
-    public function __construct(UserInterfaceMain $userRepository)
+    public function __construct(UserReadInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
