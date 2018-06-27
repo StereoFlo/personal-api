@@ -100,7 +100,7 @@ class AbstractController
         if ($additionalData) {
             $data['data'] = $additionalData;
         }
-        return new JsonResponse($data, $code);
+        return new JsonResponse($data, $code, [], true);
     }
 
     /**

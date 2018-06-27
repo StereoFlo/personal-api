@@ -6,18 +6,11 @@ use App\Entity\ApiToken;
 use App\Entity\User;
 
 /**
- * Interface UserInterface
- * @package App\Repository
+ * Interface UserReadInterface
+ * @package App\Repository\User
  */
-interface UserInterface
+interface UserReadInterface
 {
-    /**
-     * @param User $user
-     *
-     * @return UserRepository
-     */
-    public function save(User $user): UserRepository ;
-
     /**
      * @param ApiToken $apiToken
      *
@@ -31,5 +24,4 @@ interface UserInterface
      * @return User|null
      */
     public function getByEmail(string $email): ?User ;
-
 }

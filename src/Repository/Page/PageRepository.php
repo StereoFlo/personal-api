@@ -9,7 +9,7 @@ use App\Repository\SharedRepository;
  * Class PageRepository
  * @package App\Repository\Page
  */
-class PageRepository extends SharedRepository implements PageInterface
+class PageRepository extends SharedRepository implements PageWriteInterface, PageReadInterface
 {
     /**
      * @param Page $page

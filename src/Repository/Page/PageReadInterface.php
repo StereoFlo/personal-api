@@ -5,25 +5,11 @@ namespace App\Repository\Page;
 use App\Entity\Page;
 
 /**
- * Interface PageInterface
+ * Interface PageReadInterface
  * @package App\Repository\Page
  */
-interface PageInterface
+interface PageReadInterface
 {
-    /**
-     * @param Page $page
-     *
-     * @return PageRepository
-     */
-    public function save(Page $page): PageRepository ;
-
-    /**
-     * @param Page $page
-     *
-     * @return PageRepository
-     */
-    public function delete(Page $page): PageRepository ;
-
     /**
      * @param string $slug
      *

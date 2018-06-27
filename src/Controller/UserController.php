@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Repository\User\UserInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -18,11 +17,6 @@ class UserController
     private $user;
 
     /**
-     * @var UserInterface
-     */
-    private $userRepo;
-
-    /**
      * @var AbstractController
      */
     private $controller;
@@ -31,13 +25,11 @@ class UserController
      * UserController constructor.
      *
      * @param User|null          $user
-     * @param UserInterface      $userRepo
      * @param AbstractController $controller
      */
-    public function __construct(?User $user, UserInterface $userRepo, AbstractController $controller)
+    public function __construct(?User $user, AbstractController $controller)
     {
         $this->user       = $user;
-        $this->userRepo   = $userRepo;
         $this->controller = $controller;
     }
 

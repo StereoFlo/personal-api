@@ -2,6 +2,7 @@
 
 namespace App\Security\Authentication;
 
+use App\Repository\User\UserReadInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,16 +16,16 @@ class ApiUserProvider implements UserProviderInterface
 {
 
     /**
-     * @var \App\Repository\User\UserInterface
+     * @var UserReadInterface
      */
     private $userRepository;
 
     /**
      * ApiUserProvider constructor.
      *
-     * @param \App\Repository\User\UserInterface $userRepository
+     * @param UserReadInterface $userRepository
      */
-    public function __construct(\App\Repository\User\UserInterface $userRepository)
+    public function __construct(UserReadInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
