@@ -8,8 +8,15 @@ App\Entity\User:
             groups: ['user-public']
         roles:
             groups: ['user-public']
+        apiToken:
+            groups: ['user-public']
 
 App\Entity\Roles:
     attributes:
         list:
+            groups: ['user-public']
+
+App\Entity\ApiToken:
+    attributes:
+        key:
             groups: ['user-public']
