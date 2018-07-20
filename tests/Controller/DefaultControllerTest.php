@@ -20,7 +20,7 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->assertArrayHasKey('success', $responseArray);
-        $this->assertArrayHasKey('data', $responseArray);
+        $this->assertArrayHasKey('message', $responseArray);
         $this->assertEquals(false, $responseArray['success']);
     }
 }
