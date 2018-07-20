@@ -10,7 +10,7 @@ use App\Repository\SharedRepository;
  * Class UserRepository
  * @package App\Repository
  */
-class UserRepository extends SharedRepository implements UserInterface
+class UserRepository extends SharedRepository implements UserReadInterface, UserWriteInterface
 {
     /**
      * @param User $user

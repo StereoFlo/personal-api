@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Commands\UserRegisterCommand;
 use App\Entity\ApiToken;
-use App\Repository\User\UserInterface;
+use App\Repository\User\UserReadInterface;
+use App\Repository\User\UserWriteInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,9 +24,14 @@ class AuthController
     private $bus;
 
     /**
-     * @var UserInterface
+     * @var UserReadInterface
      */
-    private $userRepository;
+    private $userRead;
+
+    /**
+     * @var UserWriteInterface
+     */
+    private $userWrite;
 
     /**
      * @var AbstractController
@@ -36,13 +42,15 @@ class AuthController
      * AuthController constructor.
      *
      * @param CommandBus         $bus
-     * @param UserInterface      $userRepository
+     * @param UserReadInterface  $userRead
+     * @param UserWriteInterface $userWrite
      * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, UserInterface $userRepository, AbstractController $controller)
+    public function __construct(CommandBus $bus, UserReadInterface $userRead, UserWriteInterface $userWrite, AbstractController $controller)
     {
         $this->bus            = $bus;
-        $this->userRepository = $userRepository;
+        $this->userRead       = $userRead;
+        $this->userWrite      = $userWrite;
         $this->controller     = $controller;
     }
 
@@ -77,7 +85,7 @@ class AuthController
             throw new HttpInvalidParamException('form.input.empty');
         }
 
-        $user = $this->userRepository->getByEmail($email);
+        $user = $this->userRead->getByEmail($email);
 
         if (!$user) {
             throw new UnauthorizedHttpException('login.not.found');
@@ -87,7 +95,7 @@ class AuthController
             throw new UnauthorizedHttpException('invalid.password');
         }
 
-        $this->userRepository->save($user->setLastLogin()->setApiToken());
+        $this->userWrite->save($user->setLastLogin()->setApiToken());
 
         return $this->controller->json($user, 'user-public', 202);
     }
@@ -104,12 +112,12 @@ class AuthController
         if (empty($token)) {
             throw new HttpInvalidParamException('token.empty');
         }
-        $user = $this->userRepository->getByToken(new ApiToken($token));
+        $user = $this->userRead->getByToken(new ApiToken($token));
         if (empty($user)) {
             return $this->controller->acceptJson('logged.out');
         }
         $user->setApiToken(true);
-        $this->userRepository->save($user);
+        $this->userWrite->save($user);
 
         return $this->controller->acceptJson('logged.out');
     }

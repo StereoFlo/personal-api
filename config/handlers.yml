@@ -7,8 +7,16 @@ services:
         tags:
             - { name: tactician.handler, command: App\Commands\UserRegisterCommand }
     page.edit:
-        class: App\Handlers\PageHandler
+        class: App\Handlers\Page\PageHandler
         arguments:
           - '@page.repo'
+          - '@page.repo'
         tags:
-            - { name: tactician.handler, command: App\Commands\PageCommand }
+            - { name: tactician.handler, command: App\Commands\Page\PageCommand }
+    page.delete:
+        class: App\Handlers\Page\PageDeleteHandler
+        arguments:
+          - '@page.repo'
+          - '@page.repo'
+        tags:
+            - { name: tactician.handler, command: App\Commands\Page\PageDeleteCommand }

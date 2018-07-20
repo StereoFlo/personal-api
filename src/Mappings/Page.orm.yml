@@ -10,10 +10,11 @@ App\Entity\Page:
       nullable: true
     slug:
       type: string
-      length: 191
+      length: 50
       unique: true
     title:
       type: string
+      length: 150
     content:
       type: text
     isDefault:

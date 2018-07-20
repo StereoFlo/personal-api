@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Commands\PageCommand;
-use App\Repository\Page\PageInterface;
+use App\Commands\Page\PageDeleteCommand;
+use App\Commands\Page\PageCommand;
+use App\Repository\Page\PageReadInterface;
 use League\Tactician\CommandBus;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,7 +22,7 @@ class PageController
     private $bus;
 
     /**
-     * @var PageInterface
+     * @var PageReadInterface
      */
     private $pageRepo;
 
@@ -35,10 +35,10 @@ class PageController
      * PageController constructor.
      *
      * @param CommandBus         $bus
-     * @param PageInterface      $page
+     * @param PageReadInterface  $page
      * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, PageInterface $page, AbstractController $controller)
+    public function __construct(CommandBus $bus, PageReadInterface $page, AbstractController $controller)
     {
         $this->bus        = $bus;
         $this->pageRepo   = $page;
@@ -102,37 +102,21 @@ class PageController
      */
     public function savePage(Request $request): JsonResponse
     {
-        $pageId       = $request->request->get('pageId');
-        $title        = $request->request->get('title');
-        $content      = $request->request->get('content');
-        $slug         = $request->request->get('slug');
-        $parentPageId = $request->request->get('parentPageId');
-        $isDefault    = $request->request->getBoolean('isDefault');
-
-        $this->bus->handle(new PageCommand($pageId, $title, $content, $slug, $parentPageId, $isDefault));
+        $this->bus->handle(new PageCommand($request));
 
         return $this->controller->acceptJson('page.saved');
     }
 
     /**
+     * @todo вынести в хандлер
+     *
      * @param string $pageId
      *
      * @return JsonResponse
      */
     public function deletePage(string $pageId): JsonResponse
     {
-        if (!Uuid::isValid($pageId)) {
-            throw new NotFoundHttpException('page.not.found');
-        }
-        if (empty($pageId)) {
-            throw new NotFoundHttpException('page.not.found');
-        }
-
-        $page = $this->pageRepo->getById($pageId);
-        if (empty($page)) {
-            throw new NotFoundHttpException('page.not.found');
-        }
-        $this->pageRepo->delete($page);
+        $this->bus->handle(new PageDeleteCommand($pageId));
         return $this->controller->acceptJson('page.deleted');
     }
 }

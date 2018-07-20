@@ -7,14 +7,15 @@ App\Entity\User:
   fields:
     username:
       type: string
-      length: 191
+      length: 50
       unique: true
     email:
       type: string
-      length: 191
+      length: 100
       unique: true
     password:
-      type: text
+      type: string
+      length: 50
     lastLogin:
       type: carbondatetime
       nullable: true

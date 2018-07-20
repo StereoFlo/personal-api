@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Handlers;
+namespace App\Handlers\Page;
 
-use App\Commands\PageCommand;
+use App\Commands\Page\PageCommand;
 use App\Entity\Page;
-use App\Repository\Page\PageInterface;
+use App\Repository\Page\PageReadInterface;
+use App\Repository\Page\PageWriteInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -14,18 +15,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PageHandler
 {
     /**
-     * @var PageInterface
+     * @var PageReadInterface
      */
-    private $pageRepo;
+    private $pageRead;
+
+    /**
+     * @var PageWriteInterface
+     */
+    private $pageWrite;
 
     /**
      * PageHandler constructor.
      *
-     * @param PageInterface $page
+     * @param PageReadInterface  $pageRead
+     * @param PageWriteInterface $pageWrite
      */
-    public function __construct(PageInterface $page)
+    public function __construct(PageReadInterface $pageRead, PageWriteInterface $pageWrite)
     {
-        $this->pageRepo = $page;
+        $this->pageWrite = $pageWrite;
+        $this->pageRead  = $pageRead;
     }
 
     /**
@@ -40,7 +48,7 @@ class PageHandler
                 ->setContent($command->getContent())
                 ->setSlug($command->getSlug());
             if ($command->getParentPageId()) {
-                $parentPage = $this->pageRepo->getById($command->getParentPageId());
+                $parentPage = $this->pageRead->getById($command->getParentPageId());
                 if (empty($parentPage)) {
                     throw new NotFoundHttpException('parent page does not found'); //todo use translation
                 }
@@ -48,17 +56,17 @@ class PageHandler
             }
             $page->setUpdatedAt()
                 ->setCreatedAt();
-            $this->pageRepo->save($page);
+            $this->pageWrite->save($page);
             return;
         }
 
-        $page = $this->pageRepo->getById($command->getPageId());
+        $page = $this->pageRead->getById($command->getPageId());
         if (empty($page)) {
             throw new NotFoundHttpException('page.not.found');
         }
 
         if ($command->getParentPageId()) {
-            $parentPage = $this->pageRepo->getById($command->getParentPageId());
+            $parentPage = $this->pageRead->getById($command->getParentPageId());
             if (empty($parentPage)) {
                 throw new NotFoundHttpException('parent page does not found'); //todo use translation
             }
@@ -69,7 +77,7 @@ class PageHandler
             ->setContent($command->getContent())
             ->setSlug($command->getSlug())
             ->setUpdatedAt();
-        $this->pageRepo->save($page);
+        $this->pageWrite->save($page);
     }
 
     /**
