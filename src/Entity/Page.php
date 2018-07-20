@@ -44,6 +44,11 @@ class Page extends AbstractEntity
     private $isDefault = false;
 
     /**
+     * @var bool
+     */
+    private $inMenu = false;
+
+    /**
      * @var Carbon
      */
     protected $createdAt;
@@ -55,6 +60,7 @@ class Page extends AbstractEntity
 
     /**
      * Page constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
@@ -152,6 +158,25 @@ class Page extends AbstractEntity
     {
         $this->parentPageId = $parentPageId;
         return $this;
+    }
+
+    /**
+     * @param bool $inMenu
+     *
+     * @return Page
+     */
+    public function setInMenu(bool $inMenu): Page
+    {
+        $this->inMenu = $inMenu;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getInMenu(): bool
+    {
+        return $this->inMenu;
     }
 
 }

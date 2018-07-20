@@ -5,5 +5,7 @@ App\Entity\ApiToken:
     key:
       type: string
       nullable: true
-      length: 191
+      length: 32
       unique: true
+      default:
+        comment: md5 hash

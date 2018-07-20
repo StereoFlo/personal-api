@@ -2,6 +2,8 @@
 
 namespace App\Commands\Page;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Class PageCommand
  * @package App\Commands
@@ -41,20 +43,11 @@ class PageCommand
     /**
      * PageCommand constructor.
      *
-     * @param null|string $pageId
-     * @param string      $title
-     * @param string      $content
-     * @param string      $slug
-     * @param null|string $parentPageId
-     * @param bool        $isDefault
+     * @param Request $request
      */
-    public function __construct(?string $pageId, string $title, string $content, string $slug, ?string $parentPageId, bool $isDefault = false)
+    public function __construct(Request $request)
     {
-        $this->pageId    = $pageId;
-        $this->title     = $title;
-        $this->content   = $content;
-        $this->slug      = $slug;
-        $this->isDefault = $isDefault;
+        $this->init($request);
     }
 
     /**
@@ -103,5 +96,20 @@ class PageCommand
     public function getParentPageId(): ?string
     {
         return $this->parentPageId;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return PageCommand
+     */
+    private function init(Request $request): self
+    {
+        foreach ($request->request->all() as $key => $val) {
+            if (\property_exists($this, $key)) {
+                $this->$key = $val;
+            }
+        }
+        return $this;
     }
 }
