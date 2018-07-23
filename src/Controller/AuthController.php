@@ -67,7 +67,9 @@ class AuthController
 
         $this->bus->handle(new UserRegisterCommand($username, $email, $password));
 
-        return $this->controller->acceptJson('registred.success');
+        $user = $this->userRead->getByEmail($email);
+
+        return $this->controller->json($user, 'user-public', 202);
     }
 
     /**

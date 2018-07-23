@@ -13,15 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AuthControllerTest extends WebTestCase
 {
-    const USER_EMAIL = 'func_test@func_test.ru';
-    const USER_PASSWORD = 'Aa123456';
+    const USER_EMAIL = 'functest@functest.ru';
+    const USER_PASSWORD = 'test';
     const USER_USERNAME = 'func_test';
 
     const URL_REGISTER = '/auth/register';
     const URL_LOGIN    = '/auth/login';
     const URL_LOGOUT   = '/auth/logout';
 
-    private $token = '';
+    private static $token = '';
 
     /**
      * @var EntityManager
@@ -31,8 +31,8 @@ class AuthControllerTest extends WebTestCase
     public function testRegister(): void
     {
         $client = static::createClient();
-        $client->request(Request::METHOD_POST, self::URL_REGISTER, [
-            'email' => self::USER_EMAIL,
+        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_REGISTER, [
+            'email'    => self::USER_EMAIL,
             'password' => self::USER_PASSWORD,
             'username' => self::USER_USERNAME
         ]);
@@ -48,17 +48,17 @@ class AuthControllerTest extends WebTestCase
     public function testLogin(): void
     {
         $client = static::createClient();
-        $client->request(Request::METHOD_POST, self::URL_LOGIN, [
+        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_LOGIN, [
             'email'    => self::USER_EMAIL,
             'password' => self::USER_PASSWORD,
         ]);
 
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
         $responseArray = json_decode($client->getResponse()->getContent(), true);
-        $this->token = $responseArray['data']['apiToken']['key'];
+        static::$token = $responseArray['data']['apiToken']['key'];
         $this->assertArrayHasKey('success', $responseArray);
         $this->assertArrayHasKey('data', $responseArray);
-        $this->assertArrayHasKey('token', $responseArray['data']['apiToken']);
+        $this->assertArrayHasKey('key', $responseArray['data']['apiToken']);
 
     }
 
@@ -68,8 +68,8 @@ class AuthControllerTest extends WebTestCase
     public function testLogout()
     {
         $client = static::createClient();
-        $client->request(Request::METHOD_POST, self::URL_LOGOUT, [
-            'token' => $this->token,
+        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_LOGOUT, [
+            'token' => static::$token,
         ]);
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
     }
@@ -89,10 +89,12 @@ class AuthControllerTest extends WebTestCase
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => self::USER_EMAIL]);
-        $this->entityManager->remove($user);
-        $this->entityManager->flush();
+        $obj = new self();
+        $obj->setUp();
+        $user = $obj->entityManager->getRepository(User::class)->findOneBy(['email' => self::USER_EMAIL]);
+        $obj->entityManager->remove($user);
+        $obj->entityManager->flush();
     }
 }
