@@ -16,3 +16,4 @@ composer.phar
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+config/parameters.yml

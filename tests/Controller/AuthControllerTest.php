@@ -31,7 +31,7 @@ class AuthControllerTest extends WebTestCase
     public function testRegister(): void
     {
         $client = static::createClient();
-        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_REGISTER, [
+        $client->request(Request::METHOD_POST, self::URL_REGISTER, [
             'email' => self::USER_EMAIL,
             'password' => self::USER_PASSWORD,
             'username' => self::USER_USERNAME
@@ -48,8 +48,8 @@ class AuthControllerTest extends WebTestCase
     public function testLogin(): void
     {
         $client = static::createClient();
-        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_REGISTER, [
-            'email' => self::USER_EMAIL,
+        $client->request(Request::METHOD_POST, self::URL_LOGIN, [
+            'email'    => self::USER_EMAIL,
             'password' => self::USER_PASSWORD,
         ]);
 
@@ -68,7 +68,7 @@ class AuthControllerTest extends WebTestCase
     public function testLogout()
     {
         $client = static::createClient();
-        $client->xmlHttpRequest(Request::METHOD_POST, self::URL_REGISTER, [
+        $client->request(Request::METHOD_POST, self::URL_LOGOUT, [
             'token' => $this->token,
         ]);
         $this->assertEquals(202, $client->getResponse()->getStatusCode());
