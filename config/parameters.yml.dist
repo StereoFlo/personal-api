@@ -1,0 +1,13 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: bro-backend
+    database_user: bro-backend
+    database_password: bro-backend
+    mailer_transport: sendmail
+    mailer_host:
+    mailer_user:
+    mailer_password:
+    mailer_port:
+    mailer_encryption: tls
+    locale: 'en'
