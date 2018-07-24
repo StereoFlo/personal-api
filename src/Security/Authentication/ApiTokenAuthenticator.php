@@ -3,6 +3,7 @@ namespace App\Security\Authentication;
 
 use App\Entity\ApiToken;
 use App\Repository\User\UserReadInterface;
+use App\Application\Response\EscapedJsonResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,7 +55,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        return new JsonResponse(['success' => false, 'message' => 'Требуется авторизация'], 401);
+        return new EscapedJsonResponse(['success' => false, 'message' => 'Требуется авторизация'], 401);
     }
 
     /**
@@ -149,7 +150,7 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['success' => false, 'message' => 'Токен невалиден'], 403);
+        return new EscapedJsonResponse(['success' => false, 'message' => 'Токен невалиден'], 403);
     }
 
     /**

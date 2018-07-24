@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Application\Response\EscapedJsonResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -62,7 +63,7 @@ class AbstractController
             'message' => '',
             'data'    => $data,
         ], 'json', $context);
-        return new JsonResponse($data, $code, [], true);
+        return new EscapedJsonResponse($data, $code, [], true);
     }
 
     /**
@@ -81,7 +82,7 @@ class AbstractController
         if ($additionalData) {
             $data['data'] = $additionalData;
         }
-        return new JsonResponse($data, $code);
+        return new EscapedJsonResponse($data, $code);
     }
 
     /**
@@ -100,7 +101,7 @@ class AbstractController
         if ($additionalData) {
             $data['data'] = $additionalData;
         }
-        return new JsonResponse($data, $code, []);
+        return new EscapedJsonResponse($data, $code, []);
     }
 
     /**
