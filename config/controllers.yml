@@ -23,7 +23,3 @@ services:
       - '@user.repo'
       - '@user.repo'
       - '@abstract.controller'
-  default.controller:
-    class: App\Controller\DefaultController
-    arguments:
-      - '@abstract.controller'
