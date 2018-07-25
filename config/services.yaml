@@ -46,11 +46,14 @@ services:
       class: App\Security\Authentication\ApiUserProvider
       arguments: ['@user.repo']
 
-    App\Security\Authentication\CurrentUserFactory:
-      arguments: ['@security.token_storage']
+    app.current.user.factory:
+      class: App\Security\Authentication\CurrentUserFactory
+      arguments:
+        - '@security.token_storage'
 
-    App\Entity\User:
-      factory: 'App\Security\Authentication\CurrentUserFactory:getUser'
+    app.current.user:
+      class: App\Entity\User
+      factory: ['@app.current.user.factory', getUser]
 
 imports:
   - { resource: 'parameters.yml' }

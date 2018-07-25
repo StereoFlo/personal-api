@@ -8,8 +8,7 @@ services:
   user.controller:
     class: App\Controller\UserController
     arguments:
-      - '@App\Entity\User'
-      - '@user.repo'
+      - '@app.current.user'
       - '@abstract.controller'
   page.controller:
     class: App\Controller\PageController
