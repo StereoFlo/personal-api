@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Commands\UserRegisterCommand;
 use App\Entity\ApiToken;
 use App\Repository\User\UserReadInterface;
+use App\Repository\User\UserRepository;
 use App\Repository\User\UserWriteInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
@@ -42,11 +43,11 @@ class AuthController
      * AuthController constructor.
      *
      * @param CommandBus         $bus
-     * @param UserReadInterface  $userRead
-     * @param UserWriteInterface $userWrite
+     * @param UserRepository     $userRead
+     * @param UserRepository     $userWrite
      * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, UserReadInterface $userRead, UserWriteInterface $userWrite, AbstractController $controller)
+    public function __construct(CommandBus $bus, UserRepository $userRead, UserRepository $userWrite, AbstractController $controller)
     {
         $this->bus            = $bus;
         $this->userRead       = $userRead;

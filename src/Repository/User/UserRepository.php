@@ -4,14 +4,29 @@ namespace App\Repository\User;
 
 use App\Entity\ApiToken;
 use App\Entity\User;
-use App\Repository\SharedRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class UserRepository
  * @package App\Repository
  */
-class UserRepository extends SharedRepository implements UserReadInterface, UserWriteInterface
+class UserRepository implements UserReadInterface, UserWriteInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $manager;
+
+    /**
+     * SharedRepository constructor.
+     *
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @param User $user
      *

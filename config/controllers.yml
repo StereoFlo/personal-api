@@ -4,12 +4,14 @@ services:
     arguments:
       - '@serializer'
       - '@translator'
-      - '@App\Entity\User'
+      - '@app.current.user'
   user.controller:
     class: App\Controller\UserController
     arguments:
       - '@app.current.user'
       - '@abstract.controller'
+    public: true
+
   page.controller:
     class: App\Controller\PageController
     arguments:

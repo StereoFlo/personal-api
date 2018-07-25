@@ -43,10 +43,6 @@ class ExceptionListener
             $response = JsonResponse::create(['success' => false, 'message' => $this->translator->trans($exception->getMessage())], $exception->getStatusCode(), $exception->getHeaders());
             $event->setResponse($response);
         }
-        if ($exception instanceof \Exception) {
-            $response = JsonResponse::create(['success' => false, 'message' => $this->translator->trans($exception->getMessage())], 500);
-            $event->setResponse($response);
-        }
         if ($exception instanceof UnauthorizedHttpException) {
             $message = $exception->getMessage() ? $exception->getMessage() : 'Пользователь не найден';
             $response = JsonResponse::create(['success' => false, 'message' => $this->translator->trans($message)], 401);

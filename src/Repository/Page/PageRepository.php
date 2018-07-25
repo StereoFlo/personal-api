@@ -3,14 +3,29 @@
 namespace App\Repository\Page;
 
 use App\Entity\Page;
-use App\Repository\SharedRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class PageRepository
  * @package App\Repository\Page
  */
-class PageRepository extends SharedRepository implements PageWriteInterface, PageReadInterface
+class PageRepository implements PageWriteInterface, PageReadInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $manager;
+
+    /**
+     * SharedRepository constructor.
+     *
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @param Page $page
      *
