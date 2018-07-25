@@ -16,3 +16,14 @@ services:
       - '@tactician.commandbus'
       - '@page.repo'
       - '@abstract.controller'
+  auth.controller:
+    class: App\Controller\AuthController
+    arguments:
+      - '@tactician.commandbus'
+      - '@user.repo'
+      - '@user.repo'
+      - '@abstract.controller'
+  default.controller:
+    class: App\Controller\DefaultController
+    arguments:
+      - '@abstract.controller'

@@ -1,0 +1,29 @@
+services:
+    app.exceprion.listener:
+      class: App\Listener\ExceptionListener
+      arguments:
+        - '@translator'
+      tags:
+          - { name: kernel.event_listener, event: kernel.exception }
+
+    app.request_listener:
+      class: App\Listener\HttpRequestListener
+      tags:
+        - { name: kernel.event_listener, event: kernel.request }
+
+    app.api_authenticator:
+      class: App\Security\Authentication\ApiTokenAuthenticator
+      arguments: ['@user.repo']
+
+    app.api_user_provider:
+      class: App\Security\Authentication\ApiUserProvider
+      arguments: ['@user.repo']
+
+    app.current.user.factory:
+      class: App\Security\Authentication\CurrentUserFactory
+      arguments:
+        - '@security.token_storage'
+
+    app.current.user:
+      class: App\Entity\User
+      factory: ['@app.current.user.factory', getUser]
