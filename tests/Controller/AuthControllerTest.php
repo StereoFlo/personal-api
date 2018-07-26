@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace Tests\Controller;
 
-use App\Entity\User;
+use Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

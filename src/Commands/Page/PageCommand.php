@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Commands\Page;
+namespace Commands\Page;
 
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PageCommand
- * @package App\Commands
+ * @package Commands
  */
 class PageCommand
 {

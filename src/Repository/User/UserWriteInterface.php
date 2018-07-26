@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repository\User;
+namespace Repository\User;
 
-use App\Entity\User;
+use Entity\User;
 
 /**
  * Interface UserWriteInterface
- * @package App\Repository\User
+ * @package Repository\User
  */
 interface UserWriteInterface
 {

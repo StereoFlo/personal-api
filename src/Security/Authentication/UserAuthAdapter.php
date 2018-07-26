@@ -1,15 +1,15 @@
 <?php
 
 
-namespace App\Security\Authentication;
+namespace Security\Authentication;
 
 
-use App\Entity\User;
+use Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserAuthAdapter
- * @package App\Security\Authentication
+ * @package Security\Authentication
  */
 class UserAuthAdapter implements UserInterface
 {

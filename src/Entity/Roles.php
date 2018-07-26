@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 /**
  * Class Roles
- * @package App\Entity
+ * @package Entity
  */
 class Roles
 {

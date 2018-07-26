@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Handlers\Page;
+namespace Handlers\Page;
 
-use App\Commands\Page\PageCommand;
-use App\Entity\Page;
-use App\Repository\Page\PageReadInterface;
-use App\Repository\Page\PageWriteInterface;
+use Commands\Page\PageCommand;
+use Entity\Page;
+use Repository\Page\PageReadInterface;
+use Repository\Page\PageWriteInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class PageHandler
- * @package App\Handlers
+ * @package Handlers
  */
 class PageHandler
 {
@@ -82,6 +82,7 @@ class PageHandler
 
     /**
      * @return Page
+     * @throws \Exception
      */
     private function getPage(): Page
     {

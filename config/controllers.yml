@@ -1,27 +1,29 @@
 services:
-  abstract.controller:
-    class: App\Controller\AbstractController
+
+  Controller\AbstractController:
     arguments:
       - '@serializer'
       - '@translator'
       - '@app.current.user'
-  user.controller:
-    class: App\Controller\UserController
-    arguments:
-      - '@app.current.user'
-      - '@abstract.controller'
     public: true
 
-  page.controller:
-    class: App\Controller\PageController
+  Controller\UserController:
+    arguments:
+      - '@app.current.user'
+      - '@Controller\AbstractController'
+    public: true
+
+  Controller\PageController:
     arguments:
       - '@tactician.commandbus'
       - '@page.repo'
-      - '@abstract.controller'
-  auth.controller:
-    class: App\Controller\AuthController
+      - '@Controller\AbstractController'
+    public: true
+
+  Controller\AuthController:
     arguments:
       - '@tactician.commandbus'
       - '@user.repo'
       - '@user.repo'
-      - '@abstract.controller'
+      - '@Controller\AbstractController'
+    public: true

@@ -1,22 +1,22 @@
 services:
 
     user.register:
-        class: App\Handlers\User\UserRegisterHandler
+        class: Handlers\User\UserRegisterHandler
         arguments:
             - '@user.repo'
         tags:
-            - { name: tactician.handler, command: App\Commands\User\UserRegisterCommand }
+            - { name: tactician.handler, command: Commands\User\UserRegisterCommand }
     page.edit:
-        class: App\Handlers\Page\PageHandler
+        class: Handlers\Page\PageHandler
         arguments:
           - '@page.repo'
           - '@page.repo'
         tags:
-            - { name: tactician.handler, command: App\Commands\Page\PageCommand }
+            - { name: tactician.handler, command: Commands\Page\PageCommand }
     page.delete:
-        class: App\Handlers\Page\PageDeleteHandler
+        class: Handlers\Page\PageDeleteHandler
         arguments:
           - '@page.repo'
           - '@page.repo'
         tags:
-            - { name: tactician.handler, command: App\Commands\Page\PageDeleteCommand }
+            - { name: tactician.handler, command: Commands\Page\PageDeleteCommand }

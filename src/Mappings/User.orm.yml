@@ -1,4 +1,4 @@
-App\Entity\User:
+Entity\User:
   type: entity
   id:
     userId:
@@ -15,7 +15,7 @@ App\Entity\User:
       unique: true
     password:
       type: string
-      length: 50
+      length: 60
     lastLogin:
       type: carbondatetime
       nullable: true
@@ -28,6 +28,6 @@ App\Entity\User:
 
   embedded:
     apiToken:
-      class: App\Entity\ApiToken
+      class: Entity\ApiToken
     roles:
-      class: App\Entity\Roles
+      class: Entity\Roles

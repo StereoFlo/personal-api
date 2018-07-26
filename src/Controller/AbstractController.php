@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace Controller;
 
-use App\Entity\User;
-use App\Application\Response\EscapedJsonResponse;
+use Entity\User;
+use Application\Response\EscapedJsonResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class AbstractController
- * @package App\Controller
+ * @package Controller
  */
 class AbstractController
 {

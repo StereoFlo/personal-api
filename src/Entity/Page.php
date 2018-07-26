@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
 /**
  * Class Page
- * @package App\Entity
+ * @package Entity
  */
 class Page extends AbstractEntity
 {

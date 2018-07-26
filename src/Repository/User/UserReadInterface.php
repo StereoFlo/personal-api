@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repository\User;
+namespace Repository\User;
 
-use App\Entity\ApiToken;
-use App\Entity\User;
+use Entity\ApiToken;
+use Entity\User;
 
 /**
  * Interface UserReadInterface
- * @package App\Repository\User
+ * @package Repository\User
  */
 interface UserReadInterface
 {

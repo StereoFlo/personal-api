@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 /**
  * Class ApiToken
- * @package App\Entity
+ * @package Entity
  */
 class ApiToken
 {

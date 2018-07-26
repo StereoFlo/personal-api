@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Commands\User;
+namespace Commands\User;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class UserRegisterCommand
- * @package App\Commands
+ * @package Commands
  */
 class UserRegisterCommand
 {

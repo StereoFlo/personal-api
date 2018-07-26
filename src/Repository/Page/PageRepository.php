@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Repository\Page;
+namespace Repository\Page;
 
-use App\Entity\Page;
+use Entity\Page;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class PageRepository
- * @package App\Repository\Page
+ * @package Repository\Page
  */
 class PageRepository implements PageWriteInterface, PageReadInterface
 {

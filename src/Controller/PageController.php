@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace Controller;
 
-use App\Commands\Page\PageDeleteCommand;
-use App\Commands\Page\PageCommand;
-use App\Repository\Page\PageReadInterface;
+use Commands\Page\PageDeleteCommand;
+use Commands\Page\PageCommand;
+use Repository\Page\PageReadInterface;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class PageController
- * @package App\Controller
+ * @package Controller
  */
 class PageController
 {

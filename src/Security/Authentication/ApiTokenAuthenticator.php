@@ -1,9 +1,9 @@
 <?php
-namespace App\Security\Authentication;
+namespace Security\Authentication;
 
-use App\Entity\ApiToken;
-use App\Repository\User\UserReadInterface;
-use App\Application\Response\EscapedJsonResponse;
+use Entity\ApiToken;
+use Repository\User\UserReadInterface;
+use Application\Response\EscapedJsonResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 /**
  * Class ApiTokenAuthenticator
- * @package App\Security\Authentication
+ * @package Security\Authentication
  */
 class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 {

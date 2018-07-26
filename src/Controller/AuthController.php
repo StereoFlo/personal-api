@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace Controller;
 
-use App\Commands\User\UserRegisterCommand;
-use App\Entity\ApiToken;
-use App\Repository\User\UserReadInterface;
-use App\Repository\User\UserRepository;
-use App\Repository\User\UserWriteInterface;
+use Commands\User\UserRegisterCommand;
+use Entity\ApiToken;
+use Repository\User\UserReadInterface;
+use Repository\User\UserRepository;
+use Repository\User\UserWriteInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
  * Class AuthController
- * @package App\Controller
+ * @package Controller
  */
 class AuthController
 {
