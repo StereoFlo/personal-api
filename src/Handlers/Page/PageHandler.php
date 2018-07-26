@@ -38,7 +38,10 @@ class PageHandler
 
     /**
      * @todo need a refactor
+     *
      * @param PageCommand $command
+     *
+     * @throws \Exception
      */
     public function handle(PageCommand $command)
     {
