@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 /**
  * Class Roles
- * @package App\Entity
+ * @package Entity
  */
 class Roles
 {
     const ROLE_USER = 'ROLE_USER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
-    const ROLE_MODERATOR = 'ROLE_MODERATOR';
 
     //ROLE_USER - для бесправного неподтверждённого пользователя
     const MAPPING = [
         'user'      => self::ROLE_USER,
         'admin'     => self::ROLE_ADMIN,
-        'moderator' => self::ROLE_MODERATOR,
     ];
 
     /**

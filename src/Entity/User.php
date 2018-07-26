@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
 /**
  * Class User
- * @package App\Entity
+ * @package Entity
  */
 class User extends AbstractEntity
 {
@@ -58,6 +58,7 @@ class User extends AbstractEntity
 
     /**
      * User constructor.
+     * @throws \Exception
      */
     public function __construct()
     {

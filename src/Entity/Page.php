@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 
 /**
  * Class Page
- * @package App\Entity
+ * @package Entity
  */
 class Page extends AbstractEntity
 {
@@ -177,6 +177,17 @@ class Page extends AbstractEntity
     public function getInMenu(): bool
     {
         return $this->inMenu;
+    }
+
+    /**
+     * @param bool $isDefault
+     *
+     * @return Page
+     */
+    public function setIsDefault(bool $isDefault): Page
+    {
+        $this->isDefault = $isDefault;
+        return $this;
     }
 
 }

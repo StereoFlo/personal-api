@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Handlers\Page;
+namespace Handlers\Page;
 
-use App\Commands\Page\PageDeleteCommand;
-use App\Repository\Page\PageReadInterface;
-use App\Repository\Page\PageWriteInterface;
+use Commands\Page\PageDeleteCommand;
+use Repository\Page\PageReadInterface;
+use Repository\Page\PageWriteInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class PageDeleteHandler
- * @package App\Handlers\Page
+ * @package Handlers\Page
  */
 class PageDeleteHandler
 {

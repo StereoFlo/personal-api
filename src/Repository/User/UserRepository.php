@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repository\User;
+namespace Repository\User;
 
-use App\Entity\ApiToken;
-use App\Entity\User;
+use Entity\ApiToken;
+use Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class UserRepository
- * @package App\Repository
+ * @package Repository
  */
 class UserRepository implements UserReadInterface, UserWriteInterface
 {

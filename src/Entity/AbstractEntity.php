@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace Entity;
 
 use Carbon\Carbon;
 
 /**
  * Class AbstractEntity
- * @package App\Entity
+ * @package Entity
  */
 abstract class AbstractEntity
 {

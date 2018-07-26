@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace Controller;
 
-use App\Entity\User;
+use Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Class UserController
- * @package App\Controller
+ * @package Controller
  */
 class UserController
 {

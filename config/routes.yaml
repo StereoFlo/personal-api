@@ -1,52 +1,52 @@
 register:
     path: /auth/register
-    controller: App\Controller\AuthController::register
+    controller: Controller\AuthController::register
     methods: [POST]
 login:
     path: /auth/login
-    controller: App\Controller\AuthController::login
+    controller: Controller\AuthController::login
     methods: [POST]
 logout:
     path: /auth/logout
-    controller: App\Controller\AuthController::logout
+    controller: Controller\AuthController::logout
     methods: [POST]
 defaultPage:
     path: /page/default
-    controller: App\Controller\PageController::getDefault
+    controller: Controller\PageController::getDefault
     methods: [GET]
 getPage:
     path: /page/{slug}
-    controller: App\Controller\PageController::getBy
+    controller: Controller\PageController::getBy
     methods: [GET]
     requirements:
       slug: '.*'
 getUser:
     path: /user
-    controller: App\Controller\UserController::getUser
+    controller: Controller\UserController::getUser
     methods: [GET]
 
 ############ ADMIN ############
 
 adminPageList:
     path: /admin/page/list
-    controller: App\Controller\PageController::getList
+    controller: Controller\PageController::getList
     methods: [GET]
 
 adminGetPage:
     path: /admin/page/{pageId}
-    controller: App\Controller\PageController::getPageBy
+    controller: Controller\PageController::getPageBy
     methods: [GET]
     requirements:
       pageId: '.*'
 
 adminPageSave:
     path: /admin/page/save
-    controller: App\Controller\PageController::savePage
+    controller: Controller\PageController::savePage
     methods: [POST]
 
 adminPageDelete:
     path: /admin/page/{pageId}/delete
-    controller: App\Controller\PageController::deletePage
+    controller: Controller\PageController::deletePage
     methods: [DELETE]
     requirements:
       pageId: '.*'

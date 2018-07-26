@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Handlers\User;
+namespace Handlers\User;
 
-use App\Commands\User\UserRegisterCommand;
-use App\Entity\User;
-use App\Repository\User\UserRepository;
+use Commands\User\UserRegisterCommand;
+use Entity\User;
+use Repository\User\UserRepository;
 
 /**
  * Class UserRegister
- * @package App\Handlers
+ * @package Handlers
  */
 class UserRegisterHandler
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repository\Page;
+namespace Repository\Page;
 
-use App\Entity\Page;
+use Entity\Page;
 
 /**
  * Interface PageWriteInterface
- * @package App\Repository\Page
+ * @package Repository\Page
  */
 interface PageWriteInterface
 {

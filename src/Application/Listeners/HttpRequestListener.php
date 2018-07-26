@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Listener;
+namespace Application\Listeners;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

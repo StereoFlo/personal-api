@@ -1,4 +1,4 @@
-App\Entity\User:
+Entity\User:
     attributes:
         userId:
             groups: ['user-public']
@@ -11,12 +11,12 @@ App\Entity\User:
         apiToken:
             groups: ['user-public']
 
-App\Entity\Roles:
+Entity\Roles:
     attributes:
         list:
             groups: ['user-public']
 
-App\Entity\ApiToken:
+Entity\ApiToken:
     attributes:
         key:
             groups: ['user-public']

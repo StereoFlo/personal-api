@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Commands\Page;
+namespace Commands\Page;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class PageDeleteCommand
- * @package App\Commands\Page
+ * @package Commands\Page
  */
 class PageDeleteCommand
 {

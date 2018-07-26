@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Security\Authentication;
+namespace Security\Authentication;
 
-use App\Repository\User\UserReadInterface;
+use Repository\User\UserReadInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

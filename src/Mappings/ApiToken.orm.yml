@@ -1,4 +1,4 @@
-App\Entity\ApiToken:
+Entity\ApiToken:
   type: embeddable
 
   fields:

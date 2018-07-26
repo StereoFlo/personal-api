@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Security\Authentication;
+namespace Security\Authentication;
 
 
-use App\Entity\User;
+use Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CurrentUserFactory

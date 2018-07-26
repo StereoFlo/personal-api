@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Listener;
+namespace Application\Listeners;
 
 use HttpInvalidParamException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +12,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class ExceptionListener
- * @package App\Listener
+ * @package Listener
  */
 class ExceptionListener
 {

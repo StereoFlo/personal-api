@@ -1,29 +1,52 @@
 services:
     app.exceprion.listener:
-      class: App\Application\Listener\ExceptionListener
+      class: Application\Listeners\ExceptionListener
       arguments:
         - '@translator'
       tags:
           - { name: kernel.event_listener, event: kernel.exception }
 
     app.request_listener:
-      class: App\Application\Listener\HttpRequestListener
+      class: Application\Listeners\HttpRequestListener
       tags:
         - { name: kernel.event_listener, event: kernel.request }
 
     app.api_authenticator:
-      class: App\Security\Authentication\ApiTokenAuthenticator
+      class: Security\Authentication\ApiTokenAuthenticator
       arguments: ['@user.repo']
 
     app.api_user_provider:
-      class: App\Security\Authentication\ApiUserProvider
+      class: Security\Authentication\ApiUserProvider
       arguments: ['@user.repo']
 
     app.current.user.factory:
-      class: App\Security\Authentication\CurrentUserFactory
+      class: Security\Authentication\CurrentUserFactory
       arguments:
         - '@security.token_storage'
 
     app.current.user:
-      class: App\Entity\User
+      class: Entity\User
       factory: ['@app.current.user.factory', getUser]
+
+    serialization.config.loader:
+      class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+      arguments:
+        - '%kernel.root_dir%/../config/serialization.yml'
+
+    serialization.metadata.factory:
+      class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+      arguments:
+        - '@serialization.config.loader'
+
+    our.default.normalizer:
+      class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+      arguments: ['@serialization.metadata.factory']
+
+    default.serializer:
+      class: Symfony\Component\Serializer\Serializer
+      arguments:
+        - ['@roles.normalizer', '@our.default.normalizer']
+        - ['@serializer.encoder.json']
+
+    roles.normalizer:
+      class: Application\Serialization\RolesNormalizer
