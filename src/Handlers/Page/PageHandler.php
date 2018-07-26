@@ -4,6 +4,7 @@ namespace Handlers\Page;
 
 use Commands\Page\PageCommand;
 use Entity\Page;
+use HttpInvalidParamException;
 use Repository\Page\PageReadInterface;
 use Repository\Page\PageWriteInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,6 +52,8 @@ class PageHandler
             ->setSlug($command->getSlug())
             ->setIsDefault($command->getIsDefault());
 
+        $this->checkPreviousDefaultPage($command);
+
         if ($command->getParentPageId()) {
             $parentPage = $this->pageRead->getById($command->getParentPageId());
             if (empty($parentPage)) {
@@ -78,5 +81,22 @@ class PageHandler
             }
         }
         return new Page();
+    }
+
+    /**
+     * @param PageCommand $command
+     *
+     * @throws HttpInvalidParamException
+     */
+    private function checkPreviousDefaultPage(PageCommand $command): void
+    {
+        $page = $this->pageRead->getDefaultPage();
+        if (!$command->getIsDefault()) {
+            if (empty($page)) {
+                throw new HttpInvalidParamException('you cannot unchecdefault pagek');
+            }
+            $page->setIsDefault(false);
+            $this->pageWrite->save($page);
+        }
     }
 }
