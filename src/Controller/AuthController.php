@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Commands\UserRegisterCommand;
+use App\Commands\User\UserRegisterCommand;
 use App\Entity\ApiToken;
 use App\Repository\User\UserReadInterface;
 use App\Repository\User\UserRepository;

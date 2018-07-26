@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Handlers;
+namespace App\Handlers\User;
 
-use App\Commands\UserRegisterCommand;
+use App\Commands\User\UserRegisterCommand;
 use App\Entity\User;
 use App\Repository\User\UserRepository;
 

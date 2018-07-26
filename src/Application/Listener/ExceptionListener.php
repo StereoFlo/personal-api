@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listener;
+namespace App\Application\Listener;
 
 use HttpInvalidParamException;
 use Symfony\Component\HttpFoundation\JsonResponse;

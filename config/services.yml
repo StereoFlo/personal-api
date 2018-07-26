@@ -1,13 +1,13 @@
 services:
     app.exceprion.listener:
-      class: App\Listener\ExceptionListener
+      class: App\Application\Listener\ExceptionListener
       arguments:
         - '@translator'
       tags:
           - { name: kernel.event_listener, event: kernel.exception }
 
     app.request_listener:
-      class: App\Listener\HttpRequestListener
+      class: App\Application\Listener\HttpRequestListener
       tags:
         - { name: kernel.event_listener, event: kernel.request }
 
