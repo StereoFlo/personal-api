@@ -3,6 +3,7 @@
 namespace Commands\Page;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class PageCommand
@@ -26,6 +27,8 @@ class PageCommand
     private $title;
 
     /**
+     * @Assert\NotBlank(message="the content cannot be empty")
+     *
      * @var string
      */
     private $content;

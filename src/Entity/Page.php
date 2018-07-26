@@ -179,4 +179,15 @@ class Page extends AbstractEntity
         return $this->inMenu;
     }
 
+    /**
+     * @param bool $isDefault
+     *
+     * @return Page
+     */
+    public function setIsDefault(bool $isDefault): Page
+    {
+        $this->isDefault = $isDefault;
+        return $this;
+    }
+
 }

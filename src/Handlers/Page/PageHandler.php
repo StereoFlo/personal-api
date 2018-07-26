@@ -48,7 +48,9 @@ class PageHandler
         $page = $this->getPage($command->getPageId())
             ->setTitle($command->getTitle())
             ->setContent($command->getContent())
-            ->setSlug($command->getSlug());
+            ->setSlug($command->getSlug())
+            ->setIsDefault($command->getIsDefault());
+
         if ($command->getParentPageId()) {
             $parentPage = $this->pageRead->getById($command->getParentPageId());
             if (empty($parentPage)) {
