@@ -45,29 +45,10 @@ class PageHandler
      */
     public function handle(PageCommand $command)
     {
-        if (empty($command->getPageId())) {
-            $page = $this->getPage()
-                ->setTitle($command->getTitle())
-                ->setContent($command->getContent())
-                ->setSlug($command->getSlug());
-            if ($command->getParentPageId()) {
-                $parentPage = $this->pageRead->getById($command->getParentPageId());
-                if (empty($parentPage)) {
-                    throw new NotFoundHttpException('parent page does not found'); //todo use translation
-                }
-                $page->setParentPageId($parentPage);
-            }
-            $page->setUpdatedAt()
-                ->setCreatedAt();
-            $this->pageWrite->save($page);
-            return;
-        }
-
-        $page = $this->pageRead->getById($command->getPageId());
-        if (empty($page)) {
-            throw new NotFoundHttpException('page.not.found');
-        }
-
+        $page = $this->getPage($command->getPageId())
+            ->setTitle($command->getTitle())
+            ->setContent($command->getContent())
+            ->setSlug($command->getSlug());
         if ($command->getParentPageId()) {
             $parentPage = $this->pageRead->getById($command->getParentPageId());
             if (empty($parentPage)) {
@@ -75,20 +56,25 @@ class PageHandler
             }
             $page->setParentPageId($parentPage);
         }
-
-        $page->setTitle($command->getTitle())
-            ->setContent($command->getContent())
-            ->setSlug($command->getSlug())
-            ->setUpdatedAt();
+        $page->setUpdatedAt()
+            ->setCreatedAt();
         $this->pageWrite->save($page);
     }
 
     /**
+     * @param null|string $pageId
+     *
      * @return Page
      * @throws \Exception
      */
-    private function getPage(): Page
+    private function getPage(?string $pageId): Page
     {
+        if (isset($pageId)) {
+            $page = $this->pageRead->getById($pageId);
+            if (empty($page)) {
+                throw new NotFoundHttpException('page.not.found');
+            }
+        }
         return new Page();
     }
 }
