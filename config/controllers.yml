@@ -2,7 +2,7 @@ services:
 
   Controller\AbstractController:
     arguments:
-      - '@serializer'
+      - '@default.serializer'
       - '@translator'
       - '@app.current.user'
     public: true

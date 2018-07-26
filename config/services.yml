@@ -27,3 +27,26 @@ services:
     app.current.user:
       class: Entity\User
       factory: ['@app.current.user.factory', getUser]
+
+    serialization.config.loader:
+      class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+      arguments:
+        - '%kernel.root_dir%/../config/serialization.yml'
+
+    serialization.metadata.factory:
+      class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+      arguments:
+        - '@serialization.config.loader'
+
+    our.default.normalizer:
+      class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+      arguments: ['@serialization.metadata.factory']
+
+    default.serializer:
+      class: Symfony\Component\Serializer\Serializer
+      arguments:
+        - ['@roles.normalizer', '@our.default.normalizer']
+        - ['@serializer.encoder.json']
+
+    roles.normalizer:
+      class: Application\Serialization\RolesNormalizer
