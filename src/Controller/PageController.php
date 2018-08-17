@@ -55,7 +55,7 @@ class PageController
             throw new NotFoundHttpException('page.not.found');
         }
 
-        return $this->controller->json($defaultPage);
+        return $this->controller->json($defaultPage, 'page-list');
     }
 
     /**
@@ -69,7 +69,7 @@ class PageController
         if (empty($page)) {
             throw new NotFoundHttpException('page.not.found');
         }
-        return $this->controller->json($page);
+        return $this->controller->json($page, 'page-list');
     }
 
     /**
@@ -78,7 +78,12 @@ class PageController
     public function getList(): JsonResponse
     {
         $list = $this->pageRepo->getList();
-        return $this->controller->json($list);
+        return $this->controller->json($list, 'page-list');
+    }
+
+    public function getMenuList()
+    {
+
     }
 
     /**
@@ -92,7 +97,7 @@ class PageController
         if (empty($page)) {
             throw new NotFoundHttpException('page.not.found');
         }
-        return $this->controller->json($page);
+        return $this->controller->json($page, 'page-list');
     }
 
     /**

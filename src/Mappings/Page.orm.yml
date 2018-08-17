@@ -21,6 +21,10 @@ Entity\Page:
       type: boolean
       options:
         default: false
+    showInMenu:
+      type: boolean
+      options:
+        default: false
     createdAt:
       type: carbondatetime
       nullable: true

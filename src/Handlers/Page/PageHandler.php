@@ -37,8 +37,6 @@ class PageHandler
     }
 
     /**
-     * @todo need a refactor
-     *
      * @param PageCommand $command
      *
      * @throws \Exception
@@ -49,7 +47,8 @@ class PageHandler
             ->setTitle($command->getTitle())
             ->setContent($command->getContent())
             ->setSlug($command->getSlug())
-            ->setIsDefault($command->getIsDefault());
+            ->setIsDefault($command->getIsDefault())
+            ->setShowInMenu($command->getShowInMenu());
 
         if ($command->getParentPageId()) {
             $parentPage = $this->pageRead->getById($command->getParentPageId());

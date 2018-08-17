@@ -20,3 +20,24 @@ Entity\ApiToken:
     attributes:
         key:
             groups: ['user-public']
+
+Entity\Page:
+    attributes:
+        pageId:
+            groups: ['page-list']
+        parentPageId:
+            groups: ['page-list']
+        slug:
+            groups: ['page-list']
+        title:
+            groups: ['page-list']
+        content:
+            groups: ['page-list']
+        isDefault:
+            groups: ['page-list']
+        showInMenu:
+            groups: ['page-list']
+        createdAt:
+            groups: ['page-list']
+        updatedAt:
+            groups: ['page-list']

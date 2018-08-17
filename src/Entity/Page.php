@@ -46,7 +46,7 @@ class Page extends AbstractEntity
     /**
      * @var bool
      */
-    private $inMenu = false;
+    private $showInMenu = false;
 
     /**
      * @var Carbon
@@ -161,22 +161,22 @@ class Page extends AbstractEntity
     }
 
     /**
-     * @param bool $inMenu
+     * @param bool $showInMenu
      *
      * @return Page
      */
-    public function setInMenu(bool $inMenu): Page
+    public function setShowInMenu(bool $showInMenu): Page
     {
-        $this->inMenu = $inMenu;
+        $this->showInMenu = $showInMenu;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function getInMenu(): bool
+    public function getShowInMenu(): bool
     {
-        return $this->inMenu;
+        return $this->showInMenu;
     }
 
     /**

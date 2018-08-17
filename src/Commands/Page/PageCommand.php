@@ -44,6 +44,11 @@ class PageCommand
     private $isDefault = false;
 
     /**
+     * @var bool
+     */
+    private $showInMenu = false;
+
+    /**
      * PageCommand constructor.
      *
      * @param Request $request
@@ -99,6 +104,14 @@ class PageCommand
     public function getParentPageId(): ?string
     {
         return $this->parentPageId;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getShowInMenu(): bool
+    {
+        return $this->showInMenu;
     }
 
     /**
