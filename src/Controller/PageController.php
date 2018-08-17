@@ -81,11 +81,6 @@ class PageController
         return $this->controller->json($list, 'page-list');
     }
 
-    public function getMenuList()
-    {
-
-    }
-
     /**
      * @param string $pageId
      *
