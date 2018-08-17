@@ -20,6 +20,7 @@ class AuthControllerTest extends WebTestCase
     const URL_REGISTER = '/auth/register';
     const URL_LOGIN    = '/auth/login';
     const URL_LOGOUT   = '/auth/logout';
+    const URL_USER     = '/user';
 
     private static $token = '';
 
@@ -64,6 +65,23 @@ class AuthControllerTest extends WebTestCase
 
     /**
      * @depends testLogin
+     */
+    public function testUser()
+    {
+        $client = static::createClient();
+        $client->xmlHttpRequest(Request::METHOD_GET, self::URL_USER, [], [], [
+            'HTTP_x-api-token' => self::$token
+        ]);
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $responseArray = json_decode($client->getResponse()->getContent(), true);
+        $this->assertTrue($responseArray['success']);
+        $this->assertTrue($responseArray['data']['username'] === self::USER_USERNAME);
+        $this->assertTrue($responseArray['data']['email']    === self::USER_EMAIL);
+        $this->assertTrue($responseArray['data']['apiToken']['key'] === self::$token);
+    }
+
+    /**
+     * @depends testUser
      */
     public function testLogout()
     {
