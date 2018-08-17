@@ -4,29 +4,14 @@ namespace Repository\User;
 
 use Entity\ApiToken;
 use Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use Repository\AbstractRepository;
 
 /**
  * Class UserRepository
  * @package Repository
  */
-class UserRepository implements UserReadInterface, UserWriteInterface
+class UserRepository extends AbstractRepository implements UserReadInterface, UserWriteInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $manager;
-
-    /**
-     * SharedRepository constructor.
-     *
-     * @param EntityManagerInterface $manager
-     */
-    public function __construct(EntityManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
-
     /**
      * @param User $user
      *
@@ -34,8 +19,7 @@ class UserRepository implements UserReadInterface, UserWriteInterface
      */
     public function save(User $user): UserRepository
     {
-        $this->manager->persist($user);
-        $this->manager->flush();
+        $this->saveItem($user);
 
         return $this;
     }
@@ -47,8 +31,7 @@ class UserRepository implements UserReadInterface, UserWriteInterface
      */
     public function getByToken(ApiToken $apiToken): ?User
     {
-        return $this->manager
-            ->getRepository(User::class)
+        return $this->getRepository(User::class)
             ->findOneBy(['apiToken.key' => $apiToken->getKey()]);
     }
 
@@ -59,8 +42,7 @@ class UserRepository implements UserReadInterface, UserWriteInterface
      */
     public function getByEmail(string $email): ?User
     {
-        return $this->manager
-            ->getRepository(User::class)
+        return $this->getRepository(User::class)
             ->findOneBy(['email' => $email]);
     }
 }

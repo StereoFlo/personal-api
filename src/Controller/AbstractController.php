@@ -67,6 +67,22 @@ class AbstractController
     }
 
     /**
+     * @param int         $total
+     * @param             $data
+     * @param string|null $serializationGroup
+     * @param int         $code
+     *
+     * @return JsonResponse
+     */
+    public function dataJson(int $total, $data, string $serializationGroup = null, int $code = 200): JsonResponse
+    {
+        return $this->json([
+            'total' => $total,
+            'items' => $data,
+        ], $serializationGroup, $code);
+    }
+
+    /**
      * @param string $message
      * @param int    $code
      * @param null   $additionalData

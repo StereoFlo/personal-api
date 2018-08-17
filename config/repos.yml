@@ -1,4 +1,10 @@
 services:
+    abstract.repo:
+      abstract: true
+      class: Repository\AbstractRepository
+      arguments:
+        - '@doctrine.orm.entity_manager'
+
     user.repo:
       class: Repository\User\UserRepository
       arguments:

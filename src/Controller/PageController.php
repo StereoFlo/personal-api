@@ -78,7 +78,9 @@ class PageController
     public function getList(): JsonResponse
     {
         $list = $this->pageRepo->getList();
-        return $this->controller->json($list, 'page-list');
+        $total = $this->pageRepo->getCountForList();
+
+        return $this->controller->dataJson($total, $list, 'page-list');
     }
 
     /**
@@ -108,8 +110,6 @@ class PageController
     }
 
     /**
-     * @todo вынести в хандлер
-     *
      * @param string $pageId
      *
      * @return JsonResponse

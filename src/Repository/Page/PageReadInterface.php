@@ -30,7 +30,15 @@ interface PageReadInterface
     public function getDefaultPage(): ?Page ;
 
     /**
+     * @param int $limit
+     * @param int $offset
+     *
      * @return Page[]|null
      */
-    public function getList(): ?array ;
+    public function getList(int $limit = 10, int $offset = 0): ?array ;
+
+    /**
+     * @return int
+     */
+    public function getCountForList(): int ;
 }

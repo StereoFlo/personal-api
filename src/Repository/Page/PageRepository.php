@@ -2,30 +2,16 @@
 
 namespace Repository\Page;
 
+use Doctrine\ORM\QueryBuilder;
 use Entity\Page;
-use Doctrine\ORM\EntityManagerInterface;
+use Repository\AbstractRepository;
 
 /**
  * Class PageRepository
  * @package Repository\Page
  */
-class PageRepository implements PageWriteInterface, PageReadInterface
+class PageRepository extends AbstractRepository implements PageWriteInterface, PageReadInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $manager;
-
-    /**
-     * SharedRepository constructor.
-     *
-     * @param EntityManagerInterface $manager
-     */
-    public function __construct(EntityManagerInterface $manager)
-    {
-        $this->manager = $manager;
-    }
-
     /**
      * @param Page $page
      *
@@ -33,8 +19,7 @@ class PageRepository implements PageWriteInterface, PageReadInterface
      */
     public function save(Page $page): PageRepository
     {
-        $this->manager->persist($page);
-        $this->manager->flush();
+        $this->saveItem($page);
 
         return $this;
     }
@@ -46,8 +31,7 @@ class PageRepository implements PageWriteInterface, PageReadInterface
      */
     public function delete(Page $page): PageRepository
     {
-        $this->manager->remove($page);
-        $this->manager->flush();
+        $this->removeItem($page);
 
         return $this;
     }
@@ -59,7 +43,7 @@ class PageRepository implements PageWriteInterface, PageReadInterface
      */
     public function getBySlug(string $slug): ?Page
     {
-        return $this->manager->getRepository(Page::class)->findOneBy(['slug' => $slug]);
+        return $this->getRepository(Page::class)->findOneBy(['slug' => $slug]);
     }
 
     /**
@@ -69,7 +53,7 @@ class PageRepository implements PageWriteInterface, PageReadInterface
      */
     public function getById(string $pageId): ?Page
     {
-        return $this->manager->getRepository(Page::class)->find($pageId);
+        return $this->getRepository(Page::class)->find($pageId);
     }
 
     /**
@@ -77,14 +61,43 @@ class PageRepository implements PageWriteInterface, PageReadInterface
      */
     public function getDefaultPage(): ?Page
     {
-        return $this->manager->getRepository(Page::class)->findOneBy(['isDefault' => true]);
+        return $this->getRepository(Page::class)->findOneBy(['isDefault' => true]);
     }
 
     /**
+     * @param int $limit
+     * @param int $offset
+     *
      * @return Page[]|null
      */
-    public function getList(): ?array
+    public function getList(int $limit = 10, int $offset = 0): ?array
     {
-        return $this->manager->getRepository(Page::class)->findAll();
+        return $items = $this->getQueryForList()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return int
+     */
+    public function getCountForList(): int
+    {
+        $items = $this->getQueryForList()
+            ->getQuery()
+            ->getResult();
+
+        return \count($items);
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    private function getQueryForList(): QueryBuilder
+    {
+        return $this->getQueryBuilder()
+            ->select('page')
+            ->from(Page::class, 'page');
     }
 }
