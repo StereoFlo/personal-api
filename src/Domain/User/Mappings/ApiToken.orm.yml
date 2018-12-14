@@ -1,0 +1,11 @@
+Domain\User\Entity\ApiToken:
+  type: embeddable
+
+  fields:
+    key:
+      type: string
+      nullable: true
+      length: 32
+      unique: true
+      default:
+        comment: md5 hash

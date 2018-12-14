@@ -12,20 +12,20 @@ services:
         - { name: kernel.event_listener, event: kernel.request }
 
     app.api_authenticator:
-      class: Security\Authentication\ApiTokenAuthenticator
+      class: Application\Security\Authentication\ApiTokenAuthenticator
       arguments: ['@user.repo']
 
     app.api_user_provider:
-      class: Security\Authentication\ApiUserProvider
+      class: Application\Security\Authentication\ApiUserProvider
       arguments: ['@user.repo']
 
     app.current.user.factory:
-      class: Security\Authentication\CurrentUserFactory
+      class: Application\Security\Authentication\CurrentUserFactory
       arguments:
         - '@security.token_storage'
 
     app.current.user:
-      class: Entity\User
+      class: Domain\User\Entity\User
       factory: ['@app.current.user.factory', getUser]
 
     serialization.config.loader:

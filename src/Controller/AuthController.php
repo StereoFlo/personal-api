@@ -2,11 +2,11 @@
 
 namespace Controller;
 
-use Commands\User\UserRegisterCommand;
-use Entity\ApiToken;
-use Repository\User\UserReadInterface;
-use Repository\User\UserRepository;
-use Repository\User\UserWriteInterface;
+use Domain\Commands\User\UserRegisterCommand;
+use Domain\User\Entity\ApiToken;
+use Domain\User\Repository\UserReadInterface;
+use Domain\User\Repository\UserRepository;
+use Domain\User\Repository\UserWriteInterface;
 use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
  * Class AuthController
  * @package Controller
  */
-class AuthController
+class AuthController extends AbstractController
 {
     /**
      * @var CommandBus
@@ -35,24 +35,17 @@ class AuthController
     private $userWrite;
 
     /**
-     * @var AbstractController
-     */
-    private $controller;
-
-    /**
      * AuthController constructor.
      *
      * @param CommandBus         $bus
      * @param UserRepository     $userRead
      * @param UserRepository     $userWrite
-     * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, UserRepository $userRead, UserRepository $userWrite, AbstractController $controller)
+    public function __construct(CommandBus $bus, UserRepository $userRead, UserRepository $userWrite)
     {
         $this->bus            = $bus;
         $this->userRead       = $userRead;
         $this->userWrite      = $userWrite;
-        $this->controller     = $controller;
     }
 
     /**
@@ -70,7 +63,7 @@ class AuthController
 
         $user = $this->userRead->getByEmail($email);
 
-        return $this->controller->json($user, 'user-public', 202);
+        return $this->json($user, 'user-public', 202);
     }
 
     /**
@@ -100,7 +93,7 @@ class AuthController
 
         $this->userWrite->save($user->setLastLogin()->setApiToken());
 
-        return $this->controller->json($user, 'user-public', 202);
+        return $this->json($user, 'user-public', 202);
     }
 
     /**
@@ -117,11 +110,11 @@ class AuthController
         }
         $user = $this->userRead->getByToken(new ApiToken($token));
         if (empty($user)) {
-            return $this->controller->acceptJson('logged.out');
+            return $this->acceptJson('logged.out');
         }
         $user->setApiToken(true);
         $this->userWrite->save($user);
 
-        return $this->controller->acceptJson('logged.out');
+        return $this->acceptJson('logged.out');
     }
 }

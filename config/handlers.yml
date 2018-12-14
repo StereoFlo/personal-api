@@ -1,13 +1,13 @@
 services:
 
     user.register:
-        class: Handlers\User\UserRegisterHandler
+        class: Domain\User\Handlers\UserRegisterHandler
         arguments:
             - '@user.repo'
         tags:
             - { name: tactician.handler, command: Commands\User\UserRegisterCommand }
     page.edit:
-        class: Handlers\Page\PageHandler
+        class: Domain\Page\Handlers\PageHandler
         arguments:
           - '@page.repo'
           - '@page.repo'

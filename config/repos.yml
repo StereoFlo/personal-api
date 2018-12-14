@@ -1,16 +1,16 @@
 services:
     abstract.repo:
       abstract: true
-      class: Repository\AbstractRepository
+      class: Domain\Shared\Repository\AbstractRepository
       arguments:
         - '@doctrine.orm.entity_manager'
 
     user.repo:
-      class: Repository\User\UserRepository
+      class: Domain\User\Repository\UserRepository
       arguments:
         - '@doctrine.orm.entity_manager'
 
     page.repo:
-      class: Repository\Page\PageRepository
+      class: Domain\Page\Repository\PageRepository
       arguments:
         - '@doctrine.orm.entity_manager'

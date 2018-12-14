@@ -1,0 +1,6 @@
+Domain\User\Entity\Roles:
+  type: embeddable
+
+  fields:
+    list:
+      type: simple_array

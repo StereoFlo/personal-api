@@ -2,18 +2,17 @@
 
 namespace Controller;
 
-use Entity\User;
 use Application\Response\EscapedJsonResponse;
+use Domain\User\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class AbstractController
  * @package Controller
  */
-class AbstractController
+abstract class AbstractController
 {
     /**
      * @var Serializer
@@ -21,7 +20,7 @@ class AbstractController
     private $serializer;
 
     /**
-     * @var TranslatorInterface
+     * @var Translator
      */
     private $translator;
 
@@ -31,17 +30,36 @@ class AbstractController
     private $currentUser;
 
     /**
-     * AbstractController constructor.
+     * @param Serializer $serializer
      *
-     * @param SerializerInterface $serializer
-     * @param TranslatorInterface $translator
-     * @param User|null           $user
+     * @return AbstractController
      */
-    public function __construct(SerializerInterface $serializer, TranslatorInterface $translator, ?User $user)
+    public function setSerializer(Serializer $serializer): AbstractController
     {
-        $this->serializer  = $serializer;
-        $this->translator  = $translator;
-        $this->currentUser = $user;
+        $this->serializer = $serializer;
+        return $this;
+    }
+
+    /**
+     * @param Translator $translator
+     *
+     * @return AbstractController
+     */
+    public function setTranslator(Translator $translator): AbstractController
+    {
+        $this->translator = $translator;
+        return $this;
+    }
+
+    /**
+     * @param User|null $currentUser
+     *
+     * @return AbstractController
+     */
+    public function setCurrentUser(?User $currentUser): AbstractController
+    {
+        $this->currentUser = $currentUser;
+        return $this;
     }
 
     /**

@@ -22,8 +22,13 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-            App:
+            User:
                 is_bundle: false
                 type: yml
-                dir: '%kernel.project_dir%/src/Mappings'
-                prefix: 'Entity'
+                dir: '%kernel.root_dir%/Domain/User/Mappings'
+                prefix: 'Domain\User\Entity'
+            Page:
+                is_bundle: false
+                type: yml
+                dir: '%kernel.root_dir%/Domain/Page/Mappings'
+                prefix: 'Domain\Page\Entity'

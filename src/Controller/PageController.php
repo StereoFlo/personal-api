@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-use Commands\Page\PageDeleteCommand;
-use Commands\Page\PageCommand;
-use Repository\Page\PageReadInterface;
+use Domain\Page\Commands\PageCommand;
+use Domain\Page\Commands\PageDeleteCommand;
+use Domain\Page\Repository\PageReadInterface;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Class PageController
  * @package Controller
  */
-class PageController
+class PageController extends AbstractController
 {
     /**
      * @var CommandBus
@@ -27,22 +27,15 @@ class PageController
     private $pageRepo;
 
     /**
-     * @var AbstractController
-     */
-    private $controller;
-
-    /**
      * PageController constructor.
      *
      * @param CommandBus         $bus
      * @param PageReadInterface  $page
-     * @param AbstractController $controller
      */
-    public function __construct(CommandBus $bus, PageReadInterface $page, AbstractController $controller)
+    public function __construct(CommandBus $bus, PageReadInterface $page)
     {
         $this->bus        = $bus;
         $this->pageRepo   = $page;
-        $this->controller = $controller;
     }
 
     /**
@@ -54,8 +47,7 @@ class PageController
         if (empty($defaultPage)) {
             throw new NotFoundHttpException('page.not.found');
         }
-
-        return $this->controller->json($defaultPage, 'page-list');
+        return $this->json($defaultPage, 'page-list');
     }
 
     /**
@@ -69,7 +61,7 @@ class PageController
         if (empty($page)) {
             throw new NotFoundHttpException('page.not.found');
         }
-        return $this->controller->json($page, 'page-list');
+        return $this->json($page, 'page-list');
     }
 
     /**
@@ -80,7 +72,7 @@ class PageController
         $list = $this->pageRepo->getList();
         $total = $this->pageRepo->getCountForList();
 
-        return $this->controller->dataJson($total, $list, 'page-list');
+        return $this->dataJson($total, $list, 'page-list');
     }
 
     /**
@@ -94,7 +86,7 @@ class PageController
         if (empty($page)) {
             throw new NotFoundHttpException('page.not.found');
         }
-        return $this->controller->json($page, 'page-list');
+        return $this->json($page, 'page-list');
     }
 
     /**
@@ -106,7 +98,7 @@ class PageController
     {
         $this->bus->handle(new PageCommand($request));
 
-        return $this->controller->acceptJson('page.saved');
+        return $this->acceptJson('page.saved');
     }
 
     /**
@@ -117,6 +109,6 @@ class PageController
     public function deletePage(string $pageId): JsonResponse
     {
         $this->bus->handle(new PageDeleteCommand($pageId));
-        return $this->controller->acceptJson('page.deleted');
+        return $this->acceptJson('page.deleted');
     }
 }

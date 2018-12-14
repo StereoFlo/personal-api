@@ -1,0 +1,33 @@
+Domain\User\Entity\User:
+  type: entity
+  id:
+    userId:
+      type: guid
+
+  fields:
+    username:
+      type: string
+      length: 50
+      unique: true
+    email:
+      type: string
+      length: 100
+      unique: true
+    password:
+      type: string
+      length: 60
+    lastLogin:
+      type: carbondatetime
+      nullable: true
+    createdAt:
+      type: carbondatetime
+      nullable: true
+    updatedAt:
+      type: carbondatetime
+      nullable: true
+
+  embedded:
+    apiToken:
+      class: Entity\ApiToken
+    roles:
+      class: Entity\Roles

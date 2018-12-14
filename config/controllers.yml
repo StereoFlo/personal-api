@@ -1,29 +1,34 @@
 services:
-
-  Controller\AbstractController:
-    arguments:
-      - '@default.serializer'
-      - '@translator'
-      - '@app.current.user'
+  abstract.ctrl:
+    class: Controller\AbstractController
+    abstract: true
+    calls:
+      - method: setCurrentUser
+        arguments:
+          - '@app.current.user'
+      - method: setSerializer
+        arguments:
+          - '@default.serializer'
+      - method: setTranslator
+        arguments:
+          - '@translator'
     public: true
 
   Controller\UserController:
-    arguments:
-      - '@app.current.user'
-      - '@Controller\AbstractController'
     public: true
+    parent: abstract.ctrl
 
   Controller\PageController:
     arguments:
       - '@tactician.commandbus'
       - '@page.repo'
-      - '@Controller\AbstractController'
     public: true
+    parent: abstract.ctrl
 
   Controller\AuthController:
     arguments:
       - '@tactician.commandbus'
       - '@user.repo'
       - '@user.repo'
-      - '@Controller\AbstractController'
     public: true
+    parent: abstract.ctrl

@@ -1,4 +1,4 @@
-Entity\User:
+Domain\User\Entity\User:
     attributes:
         userId:
             groups: ['user-public']
@@ -11,17 +11,17 @@ Entity\User:
         apiToken:
             groups: ['user-public']
 
-Entity\Roles:
+Domain\User\Entity\Roles:
     attributes:
         list:
             groups: ['user-public']
 
-Entity\ApiToken:
+Domain\User\Entity\ApiToken:
     attributes:
         key:
             groups: ['user-public']
 
-Entity\Page:
+Domain\Page\Entity\Page:
     attributes:
         pageId:
             groups: ['page-list']
