@@ -28,6 +28,6 @@ Domain\User\Entity\User:
 
   embedded:
     apiToken:
-      class: Entity\ApiToken
+      class: Domain\User\Entity\ApiToken
     roles:
-      class: Entity\Roles
+      class: Domain\User\Entity\Roles
