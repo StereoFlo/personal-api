@@ -49,7 +49,7 @@ abstract class AbstractEntity
      * @param Carbon $createdAt
      * @param bool   $forceNull
      *
-     * @return AbstractEntity
+     * @return static
      */
     public function setCreatedAt(Carbon $createdAt = null, bool $forceNull = false): ?self
     {
@@ -71,7 +71,7 @@ abstract class AbstractEntity
      *
      * @param bool   $forceNull
      *
-     * @return self|null
+     * @return static|null
      */
     public function setUpdatedAt(Carbon $updatedAt = null, bool $forceNull = false): ?self
     {
