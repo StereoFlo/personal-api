@@ -63,18 +63,25 @@ abstract class AbstractController
     }
 
     /**
-     * @param object|array $data object|array to serialize and return
-     * @param string       $serializationGroup
+     * @param object|array      $data object|array to serialize and return
+     * @param string|array|null $serializationGroup
      *
-     * @param int          $code
+     * @param int               $code
      *
      * @return JsonResponse
      */
-    public function json($data, string $serializationGroup = null, int $code = 200): JsonResponse
+    public function json($data, $serializationGroup = null, int $code = 200): JsonResponse
     {
         $context['enable_max_depth'] = true;
         if ($serializationGroup) {
-            $context['groups'] = [$serializationGroup];
+            switch (true) {
+                case \is_array($serializationGroup):
+                    $context['groups'] = $serializationGroup;
+                    break;
+                case \is_string($serializationGroup):
+                    $context['groups'] = [$serializationGroup];
+                    break;
+            }
         }
         $data = $this->serializer->serialize([
             'success' => true,
@@ -85,14 +92,14 @@ abstract class AbstractController
     }
 
     /**
-     * @param int         $total
-     * @param             $data
-     * @param string|null $serializationGroup
-     * @param int         $code
+     * @param int               $total
+     * @param mixed             $data
+     * @param string|array|null $serializationGroup
+     * @param int               $code
      *
      * @return JsonResponse
      */
-    public function dataJson(int $total, $data, string $serializationGroup = null, int $code = 200): JsonResponse
+    public function dataJson(int $total, $data, $serializationGroup = null, int $code = 200): JsonResponse
     {
         return $this->json([
             'total' => $total,
