@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Class AbstractController
+ * Class AbstractApiController
  * @package Controller
  */
-abstract class AbstractController
+abstract class AbstractApiController
 {
     /**
      * @var Serializer
@@ -32,9 +32,9 @@ abstract class AbstractController
     /**
      * @param Serializer $serializer
      *
-     * @return AbstractController
+     * @return AbstractApiController
      */
-    public function setSerializer(Serializer $serializer): AbstractController
+    public function setSerializer(Serializer $serializer): AbstractApiController
     {
         $this->serializer = $serializer;
         return $this;
@@ -43,9 +43,9 @@ abstract class AbstractController
     /**
      * @param Translator $translator
      *
-     * @return AbstractController
+     * @return AbstractApiController
      */
-    public function setTranslator(Translator $translator): AbstractController
+    public function setTranslator(Translator $translator): AbstractApiController
     {
         $this->translator = $translator;
         return $this;
@@ -54,9 +54,9 @@ abstract class AbstractController
     /**
      * @param User|null $currentUser
      *
-     * @return AbstractController
+     * @return AbstractApiController
      */
-    public function setCurrentUser(?User $currentUser): AbstractController
+    public function setCurrentUser(?User $currentUser): AbstractApiController
     {
         $this->currentUser = $currentUser;
         return $this;

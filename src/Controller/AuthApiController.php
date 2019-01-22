@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
- * Class AuthController
+ * Class AuthApiController
  * @package Controller
  */
-class AuthController extends AbstractController
+class AuthApiController extends AbstractApiController
 {
     /**
      * @var CommandBus
@@ -33,7 +33,7 @@ class AuthController extends AbstractController
     private $userWrite;
 
     /**
-     * AuthController constructor.
+     * AuthApiController constructor.
      *
      * @param CommandBus         $bus
      * @param UserRepository     $userRead

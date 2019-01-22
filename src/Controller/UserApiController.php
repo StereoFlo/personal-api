@@ -5,10 +5,10 @@ namespace Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class UserController
+ * Class UserApiController
  * @package Controller
  */
-class UserController extends AbstractController
+class UserApiController extends AbstractApiController
 {
     /**
      * @return JsonResponse

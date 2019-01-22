@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class PageController
+ * Class PageApiController
  * @package Controller
  */
-class PageController extends AbstractController
+class PageApiController extends AbstractApiController
 {
     /**
      * @var CommandBus
@@ -27,7 +27,7 @@ class PageController extends AbstractController
     private $pageRepo;
 
     /**
-     * PageController constructor.
+     * PageApiController constructor.
      *
      * @param CommandBus         $bus
      * @param PageReadInterface  $page
