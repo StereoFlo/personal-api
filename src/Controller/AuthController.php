@@ -3,11 +3,9 @@
 namespace Controller;
 
 use Domain\Commands\User\UserRegisterCommand;
-use Domain\User\Entity\ApiToken;
 use Domain\User\Repository\UserReadInterface;
 use Domain\User\Repository\UserRepository;
 use Domain\User\Repository\UserWriteInterface;
-use HttpInvalidParamException;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,7 +76,7 @@ class AuthController extends AbstractController
         $password = $request->request->get('password');
 
         if (empty($email) || empty($password)) {
-            throw new HttpInvalidParamException('form.input.empty');
+            throw new \Exception('form.input.empty');
         }
 
         $user = $this->userRead->getByEmail($email);
@@ -100,15 +98,15 @@ class AuthController extends AbstractController
      * @param Request $request
      *
      * @return JsonResponse
-     * @throws HttpInvalidParamException
+     * @throws \Exception
      */
     public function logout(Request $request): JsonResponse
     {
         $token = $request->request->get('token');
         if (empty($token)) {
-            throw new HttpInvalidParamException('token.empty');
+            throw new \Exception('token.empty');
         }
-        $user = $this->userRead->getByToken(new ApiToken($token));
+        $user = $this->userRead->getByToken($token);
         if (empty($user)) {
             return $this->acceptJson('logged.out');
         }

@@ -2,7 +2,6 @@
 
 namespace Domain\User\Repository;
 
-use Domain\User\Entity\ApiToken;
 use Domain\User\Entity\User;
 
 /**
@@ -12,11 +11,11 @@ use Domain\User\Entity\User;
 interface UserReadInterface
 {
     /**
-     * @param ApiToken $apiToken
+     * @param string $apiToken
      *
      * @return User|null
      */
-    public function getByToken(ApiToken $apiToken): ?User ;
+    public function getByToken(string $apiToken): ?User ;
 
     /**
      * @param string $email

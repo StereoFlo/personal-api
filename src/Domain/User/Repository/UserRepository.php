@@ -3,7 +3,6 @@
 namespace Domain\User\Repository;
 
 use Domain\Shared\Repository\AbstractRepository;
-use Domain\User\Entity\ApiToken;
 use Domain\User\Entity\User;
 
 /**
@@ -25,20 +24,20 @@ class UserRepository extends AbstractRepository implements UserReadInterface, Us
     }
 
     /**
-     * @param ApiToken $apiToken
+     * @param string $apiToken
      *
-     * @return User|null
+     * @return User|null|object
      */
-    public function getByToken(ApiToken $apiToken): ?User
+    public function getByToken(string $apiToken): ?User
     {
         return $this->getRepository(User::class)
-            ->findOneBy(['apiToken.key' => $apiToken->getKey()]);
+            ->findOneBy(['apiToken.key' => $apiToken]);
     }
 
     /**
      * @param string $email
      *
-     * @return User|null
+     * @return User|null|object
      */
     public function getByEmail(string $email): ?User
     {
