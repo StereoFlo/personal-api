@@ -5,6 +5,10 @@ namespace Application\Security\Authentication;
 use Domain\User\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * Class CurrentUserFactory
+ * @package Application\Security\Authentication
+ */
 class CurrentUserFactory
 {
     /**
