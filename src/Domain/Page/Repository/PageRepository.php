@@ -15,13 +15,13 @@ class PageRepository extends AbstractRepository implements PageWriteInterface, P
     /**
      * @param Page $page
      *
-     * @return PageRepository
+     * @return Page|null
      */
-    public function save(Page $page): PageRepository
+    public function save(Page $page): ?Page
     {
         $this->saveItem($page);
 
-        return $this;
+        return $page;
     }
 
     /**
@@ -39,29 +39,29 @@ class PageRepository extends AbstractRepository implements PageWriteInterface, P
     /**
      * @param string $slug
      *
-     * @return Page|null
+     * @return Page|null|object
      */
     public function getBySlug(string $slug): ?Page
     {
-        return $this->getRepository(Page::class)->findOneBy(['slug' => $slug]);
+        return $this->getRepository()->findOneBy(['slug' => $slug]);
     }
 
     /**
      * @param string $pageId
      *
-     * @return Page|null
+     * @return Page|null|object
      */
     public function getById(string $pageId): ?Page
     {
-        return $this->getRepository(Page::class)->find($pageId);
+        return $this->getRepository()->find($pageId);
     }
 
     /**
-     * @return Page|null
+     * @return Page|null|object
      */
     public function getDefaultPage(): ?Page
     {
-        return $this->getRepository(Page::class)->findOneBy(['isDefault' => true]);
+        return $this->getRepository()->findOneBy(['isDefault' => true]);
     }
 
     /**
@@ -92,12 +92,20 @@ class PageRepository extends AbstractRepository implements PageWriteInterface, P
     }
 
     /**
+     * @return string
+     */
+    protected function getEntity(): string
+    {
+        return Page::class;
+    }
+
+    /**
      * @return QueryBuilder
      */
     private function getQueryForList(): QueryBuilder
     {
         return $this->getQueryBuilder()
             ->select('page')
-            ->from(Page::class, 'page');
+            ->from($this->getEntity(), 'page');
     }
 }

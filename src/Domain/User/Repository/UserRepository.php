@@ -16,11 +16,10 @@ class UserRepository extends AbstractRepository implements UserReadInterface, Us
      *
      * @return self
      */
-    public function save(User $user): UserRepository
+    public function save(User $user): User
     {
         $this->saveItem($user);
-
-        return $this;
+        return $user;
     }
 
     /**
@@ -30,7 +29,7 @@ class UserRepository extends AbstractRepository implements UserReadInterface, Us
      */
     public function getByToken(string $apiToken): ?User
     {
-        return $this->getRepository(User::class)
+        return $this->getRepository()
             ->findOneBy(['apiToken.key' => $apiToken]);
     }
 
@@ -41,7 +40,15 @@ class UserRepository extends AbstractRepository implements UserReadInterface, Us
      */
     public function getByEmail(string $email): ?User
     {
-        return $this->getRepository(User::class)
+        return $this->getRepository()
             ->findOneBy(['email' => $email]);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEntity(): string
+    {
+       return User::class;
     }
 }

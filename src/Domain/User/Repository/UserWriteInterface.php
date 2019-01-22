@@ -13,7 +13,7 @@ interface UserWriteInterface
     /**
      * @param User $user
      *
-     * @return UserRepository
+     * @return User
      */
-    public function save(User $user): UserRepository ;
+    public function save(User $user): User ;
 }

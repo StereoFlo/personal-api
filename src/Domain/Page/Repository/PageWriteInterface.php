@@ -13,9 +13,9 @@ interface PageWriteInterface
     /**
      * @param Page $page
      *
-     * @return PageRepository
+     * @return Page|null
      */
-    public function save(Page $page): PageRepository ;
+    public function save(Page $page): ?Page ;
 
     /**
      * @param Page $page

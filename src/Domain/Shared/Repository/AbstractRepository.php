@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
  * Class AbstractRepository
  * @package Repository
  */
-class AbstractRepository
+abstract class AbstractRepository
 {
     /**
      * @var EntityManagerInterface
@@ -28,13 +28,16 @@ class AbstractRepository
     }
 
     /**
-     * @param string $className
-     *
+     * @return string
+     */
+    abstract protected function getEntity(): string ;
+
+    /**
      * @return ObjectRepository
      */
-    final protected function getRepository(string $className): ObjectRepository
+    final protected function getRepository(): ObjectRepository
     {
-        return self::$manager->getRepository($className);
+        return self::$manager->getRepository($this->getEntity());
     }
 
     /**
