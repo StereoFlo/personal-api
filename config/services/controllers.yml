@@ -1,6 +1,5 @@
 services:
-  abstract.ctrl:
-    class: Controller\AbstractController
+  Controller\AbstractApiController:
     abstract: true
     calls:
       - method: setCurrentUser
@@ -16,14 +15,14 @@ services:
 
   Controller\UserController:
     public: true
-    parent: abstract.ctrl
+    parent: Controller\AbstractApiController
 
   Controller\PageController:
     arguments:
       - '@tactician.commandbus'
       - '@page.repo'
     public: true
-    parent: abstract.ctrl
+    parent: Controller\AbstractApiController
 
   Controller\AuthController:
     arguments:
@@ -31,4 +30,4 @@ services:
       - '@user.repo'
       - '@user.repo'
     public: true
-    parent: abstract.ctrl
+    parent: Controller\AbstractApiController

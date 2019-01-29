@@ -5,29 +5,28 @@
         "php": "^7.2",
         "ext-iconv": "*",
         "ext-json": "*",
-        "beberlei/DoctrineExtensions": "^1.0",
+        "beberlei/DoctrineExtensions": "*",
         "league/tactician-bundle": "^1.1",
         "nelmio/cors-bundle": "^1.5",
         "nesbot/carbon": "^1.27",
         "ramsey/uuid": "^3.7",
-        "symfony/console": "^4.0",
-        "symfony/flex": "^1.0",
-        "symfony/framework-bundle": "^4.0",
-        "symfony/lts": "^4@dev",
-        "symfony/monolog-bundle": "^3.3",
-        "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "^4.0",
-        "symfony/serializer": "^4.0",
-        "symfony/translation": "^4.0",
-        "symfony/validator": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/console": "*",
+        "symfony/flex": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/monolog-bundle": "*",
+        "symfony/orm-pack": "*",
+        "symfony/security-bundle": "*",
+        "symfony/serializer": "*",
+        "symfony/translation": "*",
+        "symfony/validator": "*",
+        "symfony/yaml": "*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.1",
-        "symfony/browser-kit": "^4.0",
-        "symfony/dotenv": "^4.0",
-        "symfony/phpunit-bridge": "^4.0",
-        "symfony/web-server-bundle": "^4.0"
+        "doctrine/doctrine-fixtures-bundle": "*",
+        "symfony/browser-kit": "*",
+        "symfony/dotenv": "*",
+        "symfony/phpunit-bridge": "*",
+        "symfony/web-server-bundle": "*"
     },
     "config": {
         "preferred-install": {
@@ -73,7 +72,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "require": "4.2.*"
         }
     }
 }
