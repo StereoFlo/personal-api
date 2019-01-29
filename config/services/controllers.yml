@@ -13,18 +13,18 @@ services:
           - '@translator'
     public: true
 
-  Controller\UserController:
+  Controller\UserApiController:
     public: true
     parent: Controller\AbstractApiController
 
-  Controller\PageController:
+  Controller\PageApiController:
     arguments:
       - '@tactician.commandbus'
       - '@page.repo'
     public: true
     parent: Controller\AbstractApiController
 
-  Controller\AuthController:
+  Controller\AuthApiController:
     arguments:
       - '@tactician.commandbus'
       - '@user.repo'
