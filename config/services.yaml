@@ -27,7 +27,7 @@ services:
     # please note that last definitions always *replace* previous ones
 
 imports:
-  - { resource: 'services/parameters.yml' }
+  - { resource: 'parameters.yml' }
   - { resource: 'services/services.yml' }
   - { resource: 'handlers.yml' }
   - { resource: 'services/repos.yml' }
