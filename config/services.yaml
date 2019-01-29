@@ -29,6 +29,6 @@ services:
 imports:
   - { resource: 'parameters.yml' }
   - { resource: 'services/services.yml' }
-  - { resource: 'handlers.yml' }
+  - { resource: 'services/handlers.yml' }
   - { resource: 'services/repos.yml' }
   - { resource: 'services/controllers.yml' }

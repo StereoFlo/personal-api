@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "207424ff732a7134d888b8a517edd4e8",
+    "content-hash": "e52a1427986685ef375046adf89f6638",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -5024,7 +5024,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1.3",
+        "php": "^7.2",
         "ext-iconv": "*",
         "ext-json": "*"
     },
